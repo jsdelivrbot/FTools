@@ -1,0 +1,20 @@
+﻿
+<div loading-pane="isPaneShown">
+<h1 ng-show="resultSearchFanpages != null">Kết quả tìm kiếm Fanpage </h1>
+    <div class="leaderboard_container cf" ng-repeat="resultSearchFanpage in resultSearchFanpages">
+        <a class="leaderboard_link cf clickable facebook" ng-click="addFanPage(resultSearchFanpage);">
+
+            <div class="leaderboard_img">
+                <img style="max-width: 50px;" src="https://graph.facebook.com/{{ resultSearchFanpage.id }}/picture">
+            </div>
+            <div class="leaderboard_nameAndPoints">
+                <div class="leaderboard_name" id="id33">
+                    <span title="{{ resultSearchFanpage.name }} - {{ resultSearchFanpage.username }}">{{ resultSearchFanpage.name }}</span><span class="leaderboard_username" title="{{ resultSearchFanpage.username }}">({{ resultSearchFanpage.username }})</span>
+                </div>
+                <div class="leaderboard_pointsRectContainer">
+                </div>
+                <div class="leaderboard_categoryAndLikes">{{ resultSearchFanpage.category }}: {{ resultSearchFanpage.fan_count | formatPrice }}</div>
+            </div>
+        </a>
+    </div>
+</div>

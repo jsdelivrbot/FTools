@@ -1,0 +1,369 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_HomeShared.cshtml";
+}
+
+
+<div ng-controller="DashboardController" ng-init="userId='@ViewBag.UserId'; init();">
+    <div loading-pane="isPaneShown">
+        <div class="containerIn clearfix">
+            <div class="top-page left w100pt">
+                <div class="logoID left">
+                    <a href="#"><span class="logo"> <img src="/Content/img-demo/facek.png"> </span>Facebook</a>
+                </div>
+                <div class="tabTop left">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a data-toggle="pill" href="#tab1">Bảng biểu</a></li>
+                        @*<li><a data-toggle="pill" href="#tab2">Bảng xếp hạng</a></li>
+                        <li><a data-toggle="pill" href="#tab3">Phân tích</a></li>
+                        <li><a data-toggle="pill" href="#tab4">Lịch sử</a></li>
+                        <li><a data-toggle="pill" href="#tab5">Ma trận</a></li>
+                        <li><a data-toggle="pill" href="#tab6">Báo cáo</a></li>*@
+                    </ul>
+                </div>
+                @*<div class="right setting">
+                    <button type="button" class="btn btn-Calender" data-toggle="modal" data-target="#viewCalender">
+                        <i class="ion-ios-gear-outline ionic"></i>
+                    </button>
+                </div>
+                <div class="right calender">
+                    <button type="button" class="btn btn-Calender" data-toggle="modal" data-target="#viewCalender">
+                        <i class="icon-calendar"></i>28 ngày qua
+                    </button>
+                </div>*@
+            </div>
+        </div>
+        </div>
+        <div class="containerInfo viewpage clearfix">
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane fade in active">
+                    @*<div class="top-pageIN left w100pt">
+                        <div class="numberPage left">
+                            Hồ sơ (3)</a>
+                            <div class="right setting">
+                                <button type="button" class="btn btn-Calender" data-toggle="modal"
+                                        data-target="#viewCalender">
+                                    <i class="ion-ios-gear-outline ionic"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="left addPageMy">
+                            <button type="button" class="btn btn-addPageMy" data-toggle="modal" data-target="#addPageMy">
+                                <i class="ion-ios-plus-outline ionic"></i>Pages của tôi
+                            </button>
+                        </div>
+                        <div class="right profile">
+                            <div class="select select--white right">
+                                <span class="placeholder">Profile Name</span>
+                                <ul>
+                                    <li data-value="es">España- Español</li>
+                                    <li data-value="en">United States - English</li>
+                                    <li data-value="fr">France - Français</li>
+                                    <li data-value="de">Deutschland - Deutsch</li>
+                                </ul>
+                                <input type="hidden" name="changemetoo">
+                            </div>
+                        </div>
+                        <div class="right addPageMy">
+                            <button type="button" class="btn btn-addPageMy" data-toggle="modal" data-target="#addPageMy">
+                                <i class="ion-ios-compose-outline ionic"></i>Chọn chỉ số hoạt động
+                            </button>
+                        </div>
+                        <div class="right addPageMy excel">
+                            <button type="button" class="btn btn-addPageMy">
+                                <i class="ion-ios-download-outline ionic"></i>Excel
+                            </button>
+
+                        </div>
+                    </div>*@
+                    <div class="subNavCategory_container left w100pt">
+                        <div class="container">
+                            <div class="dashboardPanel-dashboardTabelle dashboardListenPanel">
+                                <div class="dashboardTabelleContainer">
+                                    <div class="dashboardTableOuterContainer">
+                                        <div  id="tabelle" class="dashboardTableContainer">
+                                            <table class="table dashboardTable dashboardTabelleMitKonfiguration">
+                                                <thead>
+                                                    <tr class="listenPage_tableHeaderFacebook dashboardTabelle_header"
+                                                        style="height: 111px;">
+
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class=" sortableActive">
+                                                                <i class="dashboardTabelle-headerItem fa  "></i>
+                                                            </span>
+                                                        </th>
+                                                        @*<th class="rowHeaderSortable watchlistDashboard_qg">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-globe"></i>Phổ biến tại quốc gia
+                                                            </span>
+                                                        </th>*@
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem ionic ion-speedometer"></i>Chỉ số
+                                                                Hiệu suất
+                                                            </span>
+                                                        </th>
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-thumbs-o-up"></i>Số Fans
+                                                            </span>
+                                                        </th>
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-line-chart"></i>Tăng trưởng
+                                                                trung bình hàng tuần
+                                                            </span>
+                                                        </th>
+                                                        @*<th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-area-chart"></i>Số người
+                                                                click
+                                                            </span>
+                                                        </th>*@
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-exchange"></i>Tương tác
+                                                                bài đăng
+                                                            </span>
+                                                        </th>
+                                                        @*<th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-phone"></i>Cấp độ
+                                                                dịch vụ
+                                                            </span>
+                                                        </th>*@
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem ionic ion-android-time"></i>Thời gian
+                                                                đáp ứng
+                                                            </span>
+                                                        </th>
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-pencil-square-o"></i>Bài đăng
+                                                                mỗi ngày
+                                                            </span>
+                                                        </th>
+                                                        @*<th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-money"></i>Giá trị
+                                                                Quảng cáo
+                                                            </span>
+                                                        </th>*@
+                                                        <th class="rowHeaderSortable watchlistDashboard_helperErklaerung">
+                                                            <span rel="nofollow" class="">
+                                                                <i class="dashboardTabelle-headerItem fa fa-bullseye"></i>Số lượt truy cập mỗi ngày
+                                                            </span>
+                                                        </th>
+
+                                                        <!-- <th wicket:id="headerExtraPanelSpalte" /> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="dashboardTabelle_row" ng-repeat="item in listPOU">
+                                                        <td class="watchlistDashboard_fanpageName">
+                                                            <div style="position: relative;">
+                                                                <a target="_blank" style="display: block;" href="/detail/{{ item.page_id }}/page.html">
+                                                                    <span class="pictureContainer">
+                                                                        <img ng-src="{{ item.page_avatar }}">
+                                                                    </span><span title="{{ item.page_name }}">{{ item.page_name }}</span>
+                                                                </a>
+
+                                                                <div class="dashboardTable_removeButton" ng-click="deletePage(item.dashboard_detail_id, item.page_name);">
+                                                                    <i class="ion-ios-trash-outline"></i>
+                                                                </div>
+
+                                                            </div>
+                                                        </td>
+                                                        @*<td>
+                                                            <img src="/Content/img-demo/fg.png"></img>
+                                                        </td>*@
+                                                        <td>
+                                                                
+                                                            <span>{{ findPercent(item.engagement) | number }} %</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ item.fan_count | formatPrice }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ findPercent(item.fan_growth_weekly) | number }} %</span>
+                                                        </td>
+                                                        @*<td>
+                                                            <span>0%</span>
+                                                        </td>*@
+                                                        <td>
+                                                            <span>{{ findPercent(item.post_interaction) | number }} %</span>
+                                                        </td>
+                                                        @*<td>
+                                                            <span>0%</span>
+                                                        </td>*@
+                                                        <td>
+
+                                                            <span>{{ item.response_time }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ item.post_per_day }}</span>
+                                                        </td>
+                                                        @*<td>
+                                                            <span>0 €</span>
+                                                        </td>*@
+                                                        <td>
+                                                            <span>{{ item.total_reach_per_day }}</span>
+                                                        </td>
+    
+                                                        <!-- <td wicket:id="extraButtonContainer"><div wicket:id="extraButtonPanel" /></td> -->
+                                                    </tr>
+                                                    @*<tr class="dashboardTabelle_row dashboardTabelle_average_row">
+                                                        <td class="watchlistDashboard_fanpageName">
+                                                            Giá trị trung bình
+                                                        </td>
+                                                        <td>
+                                                            <span></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="watchlist_ppiStatusIcon listenPage_ppiStatusIcon ppi2"></span>
+                                                            <span>31%</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>1.3M</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>1.1%</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>0.82%</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>0.035%</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>0%</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>n.a.</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>10</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>639k €</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>n.a.</span>
+                                                        </td>
+                                                        <td>
+
+                                                            <span>n.a.</span>
+                                                        </td>
+                                                    </tr>*@
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-footer-note w100pt left">
+                                <div id="freePageHinweis " class="left btn-all">
+                                    <div class="right addPageMy excel export-excel">
+                                        <button type="button" class="btn btn-addPageMy" ng-click="exportData();">
+                                            Excel <i class="ion-ios-download-outline ionic"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                @*<div id="postTableGesamtContainer" class="right">
+                                    <div id="postTable10ProPage">
+                                        <ul uib-pagination boundary-links="true" total-items="item_count" ng-model="page" items-per-page="page_size" class="pagination-sm right"
+                                            template-url="/scripts/widget/pagination.html" ng-change="onPageChange()" rotate="true" max-size="5"></ul>
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            @*<div class="left addPageMy bt-pageIN ">*@
+                            @*<button type="button" class="btn btn-addPageMy" data-toggle="modal"
+                                        data-target="#addPageMy">
+                                    <i class="ion-ios-plus-outline ionic"></i>Pages của tôi
+                                </button>*@
+
+                            @*<input type="text" id="search" ng-model="textSearch" />
+                                    <button ng-click="findPageAndGroup();"> <i class="fa fa-search"></i> Tìm kiếm page </button>
+
+                                    <ul>
+                                        <li ng-repeat="listPG in pageAndgroup"> {{ listPG.name }}</li>
+                                    </ul>
+                                </div>*@
+                            @*<div class="left addPageMy bt-pageIN ">
+                                <button type="button" class="btn btn-addPageMy" data-toggle="modal"
+                                        data-target="#addPageMy">
+                                    <i class="ion-ios-plus-outline ionic"></i>Pages của tôi
+                                </button>
+                            </div>*@
+                            <div class="searchFields left">
+                                <input class="header-search-input js-header-search-input" type="text" value=""
+                                       name="fanPageNameField" id="idb8" placeholder="Tìm kiếm fanpage" ng-model="textSearch" input-enter="findPageAndGroup();">
+                                <button type="submit" class="btn btn-default header-search-submitButton" ng-click="findPageAndGroup();">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center hide" id="loadingFanPage">
+                        <img src="~/Content/img/Loading_icon.gif" alt="loading data" style="width:250px;" />
+                        <h3>Đang phân tích dữ liệu fanpage...</h3>
+                    </div>
+                    <div id="searchResult" class="searchpagePain clearfix" ng-show="resultSearchs!=null">
+                        <h1>Kết quả tìm kiếm</h1>
+                        <div class="leaderboard_container cf" ng-repeat="resultSearch in resultSearchs">
+                            <a class="leaderboard_link cf clickable facebook" ng-click="addPage(resultSearch);">
+                                <div class="leaderboard_img">
+                                    <img style="max-width: 50px;" ng-src="https://graph.facebook.com/{{ resultSearch.id }}/picture">
+                                </div>
+                                <div class="leaderboard_nameAndPoints">
+                                    <div class="leaderboard_name" id="id33">
+                                        <span title="{{ resultSearch.name }} - {{ resultSearch.username }}">{{ resultSearch.name }}</span><span class="leaderboard_username" title="{{ resultSearch.username }}">({{ resultSearch.username }})</span>
+                                    </div>
+
+                                    <div class="leaderboard_pointsRectContainer">
+
+                                    </div>
+
+                                    <div class="leaderboard_categoryAndLikes">{{ resultSearch.category }}: {{ resultSearch.fan_count | formatPrice }}</div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" class="tab-pane fade">
+                    <h3>Menu 1</h3>
+                    <p>Some content in menu 1.</p>
+                </div>
+                <div id="tab3" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="tab4" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="tab5" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="tab6" class="tab-pane fade">
+                    <h3>Menu 6</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+

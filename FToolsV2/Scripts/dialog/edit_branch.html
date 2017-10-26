@@ -1,0 +1,51 @@
+﻿
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelUpdate();">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title"><span class="fa fa-list-ul"></span>{{'branch.update_branch' | translate}}</h4>
+</div>
+<div class="modal-body" ng-form name="form.frmEditBranch">
+    <div class="form-group row">
+        <label>{{'branch.brach_name' | translate}}</label>
+        <div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="{{'branch.brach_name' | translate}}" ng-model="editBranch.BranchName" required=""
+                   aria-invalid="true">
+            <span class="err_msg" ng-show="editBranch.BranchName == '' || editBranch.BranchName == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>{{'common.address' | translate}}</label>
+        <div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="{{'common.address' | translate}}" ng-model="editBranch.Address" required="" aria-invalid="true">
+            <span class="err_msg" ng-show="editBranch.Address == '' || editBranch.Address == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>{{'common.phone' | translate}}</label>
+        <div>
+            <input type="text" name="txtPhone"
+                   class="form-control"
+                   placeholder="{{'common.phone' | translate}}" ng-model="editBranch.Phone" required=""
+                   ng-pattern="/^[0-9]{10,11}$/" aria-invalid="true">
+            <span class="err_msg"
+                  ng-show="frmAddBranch.txtPhone.$invalid && !frmAddBranch.txtPhone.$pristine || editBranch.Phone == '' || editBranch.Phone == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="cancelUpdate();">
+        <span class="fa fa-ban"></span>{{'common.cancel' | translate}}
+    </button>
+    <button id="createBranch" type="button" class="btn btn-success" ng-click="updateBranch();">
+        <span class="fa fa-save"></span>{{'common.save' | translate}}
+    </button>
+</div>

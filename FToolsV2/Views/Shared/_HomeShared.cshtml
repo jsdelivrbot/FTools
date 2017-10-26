@@ -1,0 +1,278 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" ng-app="FToolApp" ng-cloak>
+<head ng-controller="HeadController" ng-init="init();">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="description" content="{{ metaDescription }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/Content/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/Content/develop/css/styleMain.css" rel="stylesheet">
+    <link href="~/Content/develop/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/develop/css/owl.theme.default.css" rel="stylesheet" />
+    <link href="/Content/develop/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.css" />
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-104421158-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body class="homeFull">
+    <div>
+        @*<div id="loading-bar-container"></div>*@
+
+        @Html.Partial("_Menu")
+        <div id="container" class="containerAll">
+            <!--Box tổng quát-->
+            <!--Header-->
+            @Html.Partial("_Header")
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+        <div class="clearfix"></div>
+
+        <!--ViewCalender-->
+        <div class="modal fade in" id="viewCalender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="false" style="display: none;">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center box-popupB">
+                    <div class="modal-content" style="overflow: hidden;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Chọn ngày</h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a data-toggle="pill" href="#tabCalender1">YESTERDAYLAST</a></li>
+                                <li><a data-toggle="pill" href="#tabCalender2">7 DAYSLAST</a></li>
+                                <li><a data-toggle="pill" href="#tabCalender3">28 DAYSMONTH</a></li>
+                                <li><a data-toggle="pill" href="#tabCalender4">PICKER</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tabCalender1" class="tab-pane fade in active">
+                                    <h3>HOME</h3>
+                                    <p>Some content.</p>
+                                </div>
+                                <div id="tabCalender2" class="tab-pane fade">
+                                    <h3>Menu 1</h3>
+                                    <p>Some content in menu 1.</p>
+                                </div>
+                                <div id="tabCalender3" class="tab-pane fade">
+                                    <h3>Menu 2</h3>
+                                    <p>Some content in menu 2.</p>
+                                </div>
+                                <div id="tabCalender4" class="tab-pane fade">
+                                    <h3>Menu 2</h3>
+                                    <p>Some content in menu 2.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer left w100pt">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <span class="fa fa-ban"></span>Hủy
+                            </button>
+                            <button type="button" class="btn btn-success" ng-click="createCash(1);">
+                                <span class="fa fa-street-view"></span>Xem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ViewCalender-->
+        <div class="modal fade in" id="addPageMy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="false" style="display: none;">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center box-popupB">
+                    <div class="modal-content" style="overflow: hidden;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Pages của tôi</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Chọn các trang để thêm vào bảng điều khiển của bạn:</h4>
+                            <div class="addMyPagesPanel_pagesList">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                        <tr class="addMyPagesPanel_row js-addMyPagesPanel_row">
+                                            <td style="width: 75px">
+                                                <input type="checkbox" id="id1c1">
+                                                <label id="id1c1-w-lbl" for="id1c1" class="disabled">
+                                                    <img class="addMyPagesPanel_icon"
+                                                         src="https://graph.facebook.com/1665214850456743/picture?access_token=EAAF4y12rbhoBAK6tZCVCdWnXHiFD0644lTbjZAK2nBgJHNskvRRwZBRsSxuHv3AVDJAZCvUZAKbusZCgZB8UIWTrKRfYfPmscfnsNzqReqxCY2Nmrqz0gP3S8MXoVlYScNB76WbWHxNZAejVQFR7P9CsdbMGJl3QXRNmSI0HeyZCXFAZDZD">
+                                                </label>
+                                            </td>
+                                            <!-- <td style="width:30px"></td> -->
+                                            <td>
+                                                <span class="addMyPagesPanel_fanpageName">Mỹ phẩm</span>
+                                                <span class="addMyPagesPanel_notEnoughFans">does not have enough fans (37)</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="addMyPagesPanel_row js-addMyPagesPanel_row">
+                                            <td style="width: 75px">
+                                                <input type="checkbox" name="addMyPagesListView:1:checkBox" disabled="disabled"
+                                                       id="id1c2">
+                                                <!--
+                                                -->
+                                                <label id="id1c2-w-lbl" for="id1c2" class="disabled">
+                                                    <img class="addMyPagesPanel_icon"
+                                                         src="https://graph.facebook.com/356497331356171/picture?access_token=EAAF4y12rbhoBAK6tZCVCdWnXHiFD0644lTbjZAK2nBgJHNskvRRwZBRsSxuHv3AVDJAZCvUZAKbusZCgZB8UIWTrKRfYfPmscfnsNzqReqxCY2Nmrqz0gP3S8MXoVlYScNB76WbWHxNZAejVQFR7P9CsdbMGJl3QXRNmSI0HeyZCXFAZDZD">
+                                                </label>
+                                            </td>
+                                            <!-- <td style="width:30px"></td> -->
+                                            <td>
+                                                <span class="addMyPagesPanel_fanpageName">Thiết kế banner</span>
+                                                <span class="addMyPagesPanel_notEnoughFans">does not have enough fans (0)</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="addMyPagesPanel-addAll-container">
+                                <input id="addMyPagesToggleAllCheckBox" type="checkbox">
+                                <!--
+                                -->
+                                <label for="addMyPagesToggleAllCheckBox">select all</label>
+                            </div>
+                            <div class="addMyPagesPanel_note">
+                                <strong>Xin lưu ý: </strong>Nếu bạn thêm trang chưa có
+                                trong cơ sở dữ liệu của chúng tôi trước đây, thì có thể mất một thời gian cho đến khi bạn có
+                                thể xem
+                                nó trong bảng điều khiển của mình. Vui lòng làm mới trình duyệt của bạn sau một thời gian.
+                            </div>
+                        </div>
+                        <div class="modal-footer left w100pt">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <span class="fa fa-ban"></span>Hủy
+                            </button>
+                            <button type="button" class="btn btn-success" ng-click="createCash(1);">
+                                <span class="fa fa-street-view"></span>Thêm tất cả trang đã chọn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- jQuery -->
+
+        <fb app-id='@Session["FBAppId"]'></fb>
+
+
+    </div>
+
+
+    <script src="/Content/dist/js/jquery.js"></script>
+    <script src="/Content/dist/js/bootstrap.min.js"></script>
+
+    <script src="/Content/develop/slick-master/slick.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Content/dist/js/owl.carousel.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            //$('[data-toggle="tooltip"]').tooltip();
+            $(".variable").slick({
+                dots: true,
+                infinite: false,
+                //variableWidth: true,
+                arrows: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+            });
+            /*$(".lazy owl-carousel owl-theme").slick({
+                dots: true,
+                lazyLoad: 'ondemand', // ondemand progressive anticipated
+                infinite: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerMode: true,
+                centerPadding: '0px',
+            });*/
+            var owl = $(".lazy");
+            owl.owlCarousel({
+                items: 1,
+                margin: 0,
+                loop: false,
+                autoplay: false,
+                dots: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.select').on('click', '.placeholder', function () {
+            var parent = $(this).closest('.select');
+            if (!parent.hasClass('is-open')) {
+                parent.addClass('is-open');
+                $('.select.is-open').not(parent).removeClass('is-open');
+            } else {
+                parent.removeClass('is-open');
+            }
+        }).on('click', 'ul>li', function () {
+            var parent = $(this).closest('.select');
+            parent.removeClass('is-open').find('.placeholder').text($(this).text());
+            parent.find('input[type=hidden]').attr('value', $(this).attr('data-value'));
+        });
+    </script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>
+
+    @Scripts.Render("~/bundles/angularjs")
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js"></script>
+    <script src="https://fragaria.github.io/angular-daterangepicker/js/angular-daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.2/alasql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.2/xlsx.core.min.js"></script>
+    <script src='https://www.google.com/jsapi'></script>
+    <script src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type="text/javascript">
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+    </script>
+
+
+    <script>
+        function isNumeric(evt) {
+            var theEvent = evt || window.event;
+            var key = theEvent.charCode || theEvent.which;
+            var movepress = theEvent.keyCode || theEvent.which;
+            var regex = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 37, 38, 39, 40, 41, 46, 8];
+
+            if (!regex.includes(key) && !regex.includes(movepress)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+
+</body>
+</html>
+

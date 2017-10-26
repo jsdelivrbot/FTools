@@ -1,0 +1,1955 @@
+﻿@{
+    ViewBag.Title = "Detail Group";
+    Layout = "~/Views/Shared/_HomeShared.cshtml";
+}
+
+<div ng-controller="DetailGroupController" ng-init="pageId=@ViewBag.GroupId; token=@ViewBag.UserFacebookToken; init();">
+    <div class="containerIn clearfix">
+        <div class="top-page left w100pt hidden">
+            <div class="logoID left hidden">
+                <a href="#"><span class="logo"> <img src="/Content/img-demo/facek.png"> </span>Facebook</a>
+            </div>
+            <div class="sliderTop left hidden">
+                <section class="variable slider">
+                    <div class="itemS active">
+                        <a target="_blank" style="display: block;" href="#">
+                            <span class="pictureContainer">
+                                <img src="/Content/img-demo/logo-feedy.jpg">
+                            </span><span title="{{ DetailGroup.group_name }}">{{ DetailGroup.group_name }}</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+            <div class="left setting" style="padding: 7px 10px;">
+            </div>
+        </div>
+    </div>
+    <div class="containerInfo clearfix">
+        <div class="pageContainer">
+            <div class="left w100pt fanPageFsale_Top">
+                <div id="fanPageFsale_mainResultContainer" class="">
+                    <div class="fanPageFsale_imageContainer cl">
+                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                    </div>
+                    <div class="fanPageFsale_floatContentContainer cf">
+                        <h1 class="fanPageFsale_header">
+                            <span>{{ DetailGroup.group_name }}</span> @*<span class="small">Facebook Insights</span>*@
+                        </h1>
+                        <div class="fanPageFsale_aboutContainer cf">
+                            <div class="fanPageFsale_additionalInfo">
+                                <p class="lightGrey hidden">
+                                    Giới thiệu: “<span>{{ DetailGroup.group_about }}</span>”
+                                </p>
+                                <p class="lightGrey hidden">
+                                    <span id="id36c">
+                                        <span style="white-space: nowrap;">
+                                            Danh mục: <span></span>
+                                        </span>
+                                    </span>
+                                </p>
+                                <form id="id36d" style="display:none"></form>
+                                <p class="lightGrey hidden" min-width 200px;">
+                                    <span>Phổ biến ở: </span>
+                                </p>
+                                <p id="id36e" style="display:none"></p>
+                                <p class="lightGrey cl">
+                                    <strong>Thông tin chi tiết: </strong><span>{{ DetailGroup.group_description }}</span>
+                                </p>
+                                <p id="id36f" style="display:none"></p>
+                                <p id="id370" style="display:none"></p>
+                                <p id="id371" style="display:none"></p>
+                                <p class="lightGrey fanPageFsale_moreLinks">
+                                    <a target="_blank" href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">Link Facebook</a>
+                                    @*|*@
+                                    <a class="hide" rel="nofollow"
+                                       href="./Feedy.vn?640-1.ILinkListener-fanPageFsalePanel-resultContainer-exportToExcelLink">
+                                        Xuất Excel
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fanPageFsale_headerKpiContainer cl">
+                        @*<button type="button" class="fanPageFsale_kpiHelpIcon btn btn-Calender"
+                                    data-toggle="modal" data-target="#viewHelf">
+                                <div id="kpiHelpButton" class="fanPageFsale_kpiHelpIconiN"></div>
+                            </button>*@
+                        <h3 class="fanPageFsale_subHeader">Tổng quan KPI</h3>
+                        <div class="fanPageFsale_headerKpiLeft">
+                            <table class="fanPageFsale_headerKpiTable">
+                                <tbody>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Number of fans">Người tham gia</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar" title="3.7M">
+                                                    <div class="progressbar-inner" style="width: 100%;">
+                                                        <span>{{ DetailGroup.members_count | formatPrice }}</span>
+                                                    </div>
+                                                    <div class="progressbar-label">3.7M</div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Average Weekly Growth">Tăng trưởng</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar">
+                                                    <div class="progressbar-inner" style="width: 0%;">
+                                                        <span></span>
+                                                    </div>
+                                                    <div class="progressbar-label"></div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Ad-Value (EUR)">Giá trị Quảng cáo (EUR)</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar">
+                                                    <div class="progressbar-inner" style="width: 100%;">
+                                                        <span>n.a.</span>
+                                                    </div>
+                                                    <div class="progressbar-label">n.a.</div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="fanPageFsale_headerKpiRight">
+                            <table class="fanPageFsale_headerKpiTable">
+                                <tbody>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Posts per day">Bài viết mỗi ngày</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar">
+                                                    <div class="progressbar-inner" style="width: 100%;">
+                                                        <span>{{ DetailGroup.post_per_day }}</span>
+                                                    </div>
+                                                    <div class="progressbar-label">{{ DetailGroup.post_per_day }}</div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Engagement">Hiệu quả tương tác</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar">
+                                                    <div class="progressbar-inner" style="width: {{ findPercent(DetailGroup.engagement) }}%;">
+                                                        <span>{{ findPercent(DetailGroup.engagement) | number }} %</span>
+                                                    </div>
+                                                    <div class="progressbar-label">{{ findPercent(DetailGroup.engagement) | number }} %</div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="name">
+                                            <span title="Post interaction">Tương tác bài viết</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progressbar">
+                                                    <div class="progressbar-inner" style="width: {{ findPercent(DetailGroup.post_interaction) }}%;">
+                                                        <span>{{ findPercent(DetailGroup.post_interaction) | number }} %</span>
+                                                    </div>
+                                                    <div class="progressbar-label">{{ findPercent(DetailGroup.post_interaction) | number }} %</div>
+                                                    <!--
+                                                    <a wicket:id="freischaltenLink" class="progressbar-label"><wicket:message key="BalkenPanel.JetztFreischalten" /></a>
+                                                    -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="fanPageFsale_headerKpiPpi hide">
+                            <p class="fanPageFsale_ppiText">
+                                Hiệu suất
+                            </p>
+                            <p class="fanPageFsale_ppiValue">77%</p>
+                            <div class="fanPageFsale_ppiStatusIconContainer">
+                                <div class="fanPageFsale_ppiStatusIcon ppi6"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="fanPageFsale_kpiHelpContainer" class="popup"
+                         style="width: 840px; visibility: hidden; position: absolute;">
+                        <h2>Executive Summary KPIs</h2>
+
+                        <div class="fanPageFsale_kpiHelpBlock mr">
+                            <h4>Fans</h4>
+                            <p>Current number of Facebook fans</p>
+                            <h4>Growth</h4>
+                            <p>Average growth of number of fans during last 28 days</p>
+                            <h4>Ad value</h4>
+                            <p>
+                                How much would have been the cost to reach as many people with paid ads in other
+                                marketing
+                                channels as this fan page did reach with its posts during the last 28 days
+                            </p>
+                            <h4>Service level</h4>
+                            <p>How many posts from fans get a response from this fan page?</p>
+                            <h4>Response time</h4>
+                            <p>
+                                How much time, on average, does it take the fan page to react to fan posts and
+                                questions
+                            </p>
+                        </div>
+                        <div class="fanPageFsale_kpiHelpBlock mr">
+                            <h4>Posts per day</h4>
+                            <p>Average number of posts per day</p>
+                            <h4>Engagement</h4>
+                            <p>
+                                The engagement value shows the engagement of fans for a fan page. It is calculated by the
+                                average amount of likes, comments and shares per day, divided by the number of fans
+                            </p>
+                            <h4>Post Interaction</h4>
+                            <p>
+                                The post interaction indicates how strong fans react to posts. It is the average number
+                                of
+                                likes, comments and shares per fan for all posts.
+                            </p>
+                            <!-- <h4><wicket:message key="KarmaPage.HeaderKpi.KARMA" /></h4> -->
+                            <!-- <p><wicket:message key="KarmaPage.HeaderKpi.KARMA.Help" /></p> -->
+                        </div>
+                        <div class="fanPageFsale_kpiHelpBlock">
+                            <h4>Page Performance</h4>
+                            <p>
+                                The Page Performance Index (PPI) is a combination of the engagement value and the growth
+                                of
+                                the fan page (increase of number of fans). It is an indicator for the overall strength
+                                of a
+                                Facebook fan page.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="fanPageFsale_boxRight">
+                    <div>
+                        <div class="fanPageFsale_watchlistContainer" id="id36a">
+                            <div class="watchlistPanel_container">
+                                <h3>
+                                    <div class="watchlistPanel_listenName">Facebook</div>
+                                </h3>
+
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="TopGroup in listTopGroups">
+                                        <a href="http://www.facebook.com/{{ TopGroup.facebook_id }}"><span>{{ TopGroup.group_name }}</span></a>
+                                    </li>
+                                </ul>
+                                <a id="id36b" style="display:none"></a>
+
+                                <p class="watchlistPanel_manageList">
+                                    <a rel="nofollow"
+                                       href="/dashboard.html">
+                                        Trang tổng quan
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left w100pt fanPageFsale_botton">
+                <h3 class="fanPageFsale_subHeader">Phân tích chi tiết</h3>
+                <div class="tabTop left row" style="width: 100%;">
+                    @*<div class="col-sm-9">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a data-toggle="pill" href="#tab1">NỘI DUNG </a></li>
+                                <li><a data-toggle="pill" href="#tab2">TIMES & CÁC LOẠI </a></li>
+                            <li><a data-toggle="pill" href="#tab3">NHÂN VIÊN</a></li>
+                            <li><a data-toggle="pill" href="#tab4">Bài viết của FAN</a></li>
+                            <li><a data-toggle="pill" href="#tab5">Ma trận</a></li>
+                            <li><a data-toggle="pill" href="#tab6">Báo cáo</a></li>
+                            </ul>
+                        </div>
+                        <div class="pull-right col-sm-3" style="padding-top:3px;">
+                            <select class="form-control" ng-model="typedate" ng-init="typedate = '3'" ng-change="onQuerySelectDateChange()">
+                                <option value="2">Tuần này</option>
+                                <option value="8">7 ngày trước</option>
+                                <option value="7">Tuần trước</option>
+                                <option value="3">Tháng này</option>
+                                <option value="9">Tháng trước</option>
+                                <option value="">Tùy chọn</option>
+                            </select>
+                        </div>*@
+                    <div class="col-sm-8 hide" style="padding-top:3px;">
+                        <div class="col-sm-4">
+                            <form name="dateForm" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="daterange" class="control-label">Thời gian</label>
+                                    <input date-range-picker id="daterange" name="daterange" class="form-control date-picker" type="text"
+                                           ng-model="date" options="opts" required />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center hide" id="loadingGroup">
+        <img src="~/Content/img/Loading_icon.gif" alt="loading data" style="width:250px;" />
+        <h3>Đang phân tích dữ liệu group...</h3>
+    </div>
+    <div class="text-center hide" id="updateGroup">
+        <img src="~/Content/img/Loading_icon.gif" alt="update data" style="width:100px;" />
+        <h3>Đang cập nhật dữ liệu group...</h3>
+    </div>
+    <div class="containerInDetail clearfix" ng-controller="LandingPageController">
+        <div class="tab-content">
+            <div class="text-center hide" id="loginGroup">
+                <h3>Bạn cần là thành viên của nhóm và đăng nhập để xem phân tích!</h3>
+                <button class="btn btn-login btn-lg" ng-click="loginFacebook(1, pageId);">Đăng nhập</button>
+            </div>
+        </div>
+    </div>
+    <div class="containerInDetail clearfix" ng-show="detailStats!=null" id="dataGroup">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane fade in active">
+                <!--Lịch sử đăn bài-->
+                <div class="detail_container lsdang hide">
+                    <h3 class="lable"><span></span> Lịch sử đăng bài</h3>
+                    <div class="chart-container">
+                        <div class="row">
+                            <div class="col-xs-8 lsdangLeft">
+                                @*<div class="chart-top-note chart-header-dropdown w100pt left">
+                                        <div class="select w100pt left">
+                                            <span class="placeholder">Select your language</span>
+                                            <ul>
+                                                <li data-value="es">España- Español</li>
+                                                <li data-value="en">United States - English</li>
+                                                <li data-value="fr">France - Français</li>
+                                                <li data-value="de">Deutschland - Deutsch</li>
+                                            </ul>
+                                            <input type="hidden" name="changeme" />
+                                        </div>
+
+                                    </div>*@
+                                <div class="chart-center-note w100pt left">
+                                    <img src="/Content/img-demo/Layer%2049.png">
+                                </div>
+                                <div class="chart-footer-note w100pt left">
+                                    Xem tất cả đóng góp của khoảng thời gian đã
+                                    chọn. Điểm càng cao thì giá trị của chỉ số hiệu suất chính đã chọn càng lớn. Nhấp
+                                    vào một mục để xem chi tiết.
+                                </div>
+                            </div>
+                            <div class="col-xs-4 lsdangRight">
+                                @*<div class="chart-top-note chart-header-dropdown w100pt left">
+                                        <h1 style="margin-top: 0px;"> Selected contribution</h1>
+                                    </div>*@
+                                <div class="chart-center-note w100pt left">
+                                    <div class="historyPanel-chartPostContainer">
+                                        <div class="postPanel_container cf  postPanel_withPicture" ng-repeat="newPost in newPosts">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailPage.page_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailPage.facebook_id }}">{{ DetailPage.page_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ newPost.link }}">{{ newPost.type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date"
+                                                       href="{{ newPost.link }}">
+                                                        {{ newPost.facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="https://www.facebook.com/feedy.vn/videos/522041701474676/">
+                                                        <span style="vertical-align: bottom; width: 100%; height: 297px;">
+                                                            <iframe name="f1dfd19492fa7f" width="1000px" height="1000px"
+                                                                    frameborder="0" allowtransparency="true"
+                                                                    allowfullscreen="true"
+                                                                    scrolling="no"
+                                                                    title="fb:video Facebook Social Plugin"
+                                                                    src="https://www.facebook.com/v2.4/plugins/video.php?app_id=414289821920794&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FXBwzv5Yrm_1.js%3Fversion%3D42%23cb%3Df2c1b3fa75cb068%26domain%3Dwww.fanpagekarma.com%26origin%3Dhttp%253A%252F%252Fwww.fanpagekarma.com%252Ff34b527b0e45dc%26relation%3Dparent.parent&amp;container_width=314&amp;href=https%3A%2F%2Fwww.facebook.com%2Ffeedy.vn%2Fvideos%2F522041701474676%2F&amp;locale=en_US&amp;sdk=joey"
+                                                                    style="border: none; visibility: visible; width: 100%; height: 297px;"
+                                                                    class=""></iframe>
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>
+                                                        Chống ngấy cho cả nhà với gỏi xoài cá trê kiểu Thái vừa chua cay
+                                                        đã
+                                                        miệng lại giòn ngon siêu hấp dẫn! Nguyên liệu dễ kiếm, công thức
+                                                        dễ
+                                                        làm mà thành phẩm "miễn chê" thế này thì ngại gì mà không thử ;)<br>--------------------<br>Tải
+                                                        app Feedy, đăng nhập và điền mã 000972 để có cơ hội nhận Iphone,
+                                                        Ipad hoàn toàn miễn phí.<br>- IOS: http://apple.co/2gPHt6V<br>-
+                                                        Android: http://bit.ly/2htsNhx<br>- Youtube: http:/...
+                                                    </p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>1,819</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>62</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>1</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>7</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>43</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>895</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Danh sách bài đăng-->
+                <div class="detail_container baidang" ng-show="detailStats!=null">
+                    <h3 class="lable"><span></span> Danh sách đăng bài</h3>
+                    <div class="chart-container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="chart-top-note chart-header-dropdown w100pt left">
+                                    <div class="select select--white right" style="margin-left: 0px;">
+                                        <select class="form-control" ng-model="page_size" ng-init="page_size = '10'" ng-change="onPageSizeChange()">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                    <div class="right" style="margin: 10px; padding-left: 10px; font-size: 14px;">Số bản ghi</div>
+                                    <div class="select select--white right">
+                                        <div class="col-md-12" style="padding: 0px;">
+                                            <input class="form-control" id="txtSearch" type="text" placeholder="Tìm kiếm" ng-model="q.txtSearch" ng-keyup="$event.keyCode == 13 ? onQueryChange() : null">
+                                        </div>
+                                        <i class="fa fa-search" style="color:#000; z-index: 2; position: absolute; top: 10px; right: 25px;" data-selector="true" ng-click="onQueryChange()"></i>
+                                    </div>
+                                    <div class="right">
+                                        <select class="form-control" ng-model="q.type" ng-init="q.type = '-1'" ng-change="onQueryChange()">
+                                            <option value="-1">Tất cả</option>
+                                            <option value="0">Video</option>
+                                            <option value="1">Ảnh</option>
+                                            <option value="2">Link</option>
+                                            <option value="3">Status</option>
+                                        </select>
+                                    </div>
+                                    <div class="right" style="margin: 10px; padding-left: 10px; font-size: 14px;">Bộ lọc</div>
+                                    @*<div class="select select--white right">
+                                            <input type="text" class="form-control" readonly placeholder="Ngày kết thúc" ng-change="onQueryChange()"
+                                                   uib-datepicker-popup="{{ DOBformat }}" ng-model="q.endDate" is-open="DatePopup.endDate" datepicker-options="dateOptionsEnd"
+                                                   close-text="Đóng" clear-text="Làm mới" current-text="Hôm nay">
+                                            <button class="btCalender" ng-click="openDatePopup(1);" style="top:6px;right:20px;"><i class="fa fa-calendar"></i></button>
+                                        </div>
+                                        <div class="select select--white right">
+                                            <input type="text" class="form-control" readonly placeholder="Ngày bắt đầu" ng-change="onQueryChange()"
+                                                   uib-datepicker-popup="{{ DOBformat }}" ng-model="q.StartDate" is-open="DatePopup.startDate"
+                                                   datepicker-options="dateOptionsStart" close-text="Đóng" clear-text="Làm mới" current-text="Hôm nay">
+                                            <button class="btCalender" ng-click="openDatePopup(0);" style="top:6px;right:20px;"><i class="fa fa-calendar"></i></button>
+                                        </div>*@
+                                </div>
+                                <div class="chart-center-note w100pt left">
+                                    <div class="postTableGraph_chartBox">
+                                        <div id="chart_div_PTGP">
+                                            <div class="google-visualization-table">
+                                                <table class="google-visualization-table-table" cellspacing="0"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                        <tr class="google-visualization-table-tr-head">
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(8);">
+                                                                Date
+                                                                <span ng-show="statusSort=='8' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='8' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Picture<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Post<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(0);">
+                                                                Likes
+                                                                <span ng-show="statusSort=='0' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='0' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(7);">
+                                                                Comments
+                                                                <span ng-show="statusSort=='7' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='7' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(6);">
+                                                                Shares
+                                                                <span ng-show="statusSort=='6' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='6' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(1);">
+                                                                Love
+                                                                <span ng-show="statusSort=='1' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='1' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(2);">
+                                                                Haha
+                                                                <span ng-show="statusSort=='2' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='2' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(3);">
+                                                                Wow
+                                                                <span ng-show="statusSort=='3' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='3' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(4);">
+                                                                Sad
+                                                                <span ng-show="statusSort=='4' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='4' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="getTop(5);">
+                                                                Anger
+                                                                <span ng-show="statusSort=='5' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSort=='5' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            @*<th class="google-visualization-table-th gradient unsorted">
+                                                                Attachment<span class="google-visualization-table-sortind"></span>
+                                                            </th>*@
+                                                            <th ng-show="q.type == '2'" class="google-visualization-table-th gradient unsorted">
+                                                                Link<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="postTableRow" ng-repeat="dS in detailStats">
+                                                            <td class="google-visualization-table-td google-visualization-table-td-center">
+                                                                {{ dS.facebook_created_at | date: "dd/MM/yyyy" }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td">
+                                                                <a ng-show="dS.full_picture!=null" href="https://facebook.com/{{ dS.facebook_id }}"
+                                                                   target="_blank" class="previewLink">
+                                                                    <img ng-src="{{ dS.full_picture }}"
+                                                                         class="previewImage">
+                                                                </a>
+                                                                <a ng-show="dS.full_picture==null" href="https://facebook.com/{{ dS.facebook_id }}"
+                                                                   target="_blank" class="previewLink">
+                                                                    <img src="~/Content/develop/images/no-image.png"
+                                                                         class="previewImage">
+                                                                </a>
+                                                            </td>
+                                                            <td class="google-visualization-table-td">
+                                                                <a ng-show="dS.link!=null" href="{{ dS.link }}"
+                                                                   target="_blank">
+                                                                    {{ dS.content.substr(0, 50).concat("...") }}
+                                                                </a>
+                                                                <a ng-show="dS.link==null" href="https://facebook.com/{{ dS.facebook_id }}"
+                                                                   target="_blank">
+                                                                    {{ dS.content.substr(0, 50).concat("...") }}
+                                                                </a>
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.like_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.comment_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.share_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.love_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.haha_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.wow_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.sad_count }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ dS.anger_count }}
+                                                            </td>
+                                                            @*<td class="google-visualization-table-td google-visualization-table-td-number" style="font-size: 20px; text-align: center;">
+                                                                <span ng-show="dS.has_attachment==true" class="fa fa-share-square"></span></a>
+                                                            </td>*@
+                                                            <td ng-show="q.type == '2'" class="google-visualization-table-td google-visualization-table-td-number" style="font-size: 20px; text-align: center;">
+                                                                <a href="http://facebook.com/{{ dS.facebook_id }}"><span class="fa fa-facebook-square"></span></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="google-visualization-table-div-page gradient">
+                                                    <div class="charts-inline-block charts-custom-button charts-custom-button-disabled charts-custom-button-collapse-right"
+                                                         role="button" aria-disabled="true" style="user-select: none;">
+                                                        <div class="charts-inline-block charts-custom-button-outer-box">
+                                                            <div class="charts-inline-block charts-custom-button-inner-box">
+                                                                <span class="google-visualization-table-page-prev"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="charts-inline-block charts-custom-button charts-custom-button-collapse-left"
+                                                         role="button" tabindex="0" style="user-select: none;">
+                                                        <div class="charts-inline-block charts-custom-button-outer-box">
+                                                            <div class="charts-inline-block charts-custom-button-inner-box">
+                                                                <span class="google-visualization-table-page-next"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="google-visualization-table-page-numbers">
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient current">1</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">2</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">10</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">100</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">140</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">142</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-footer-note w100pt left">
+                                    <div id="freePageHinweis " class="left btn-all">
+                                        @*<button class="btn btn-default btn-prev pull-left" ng-click="GoPrevPage();">
+                                                <!--<i class="fa fa-long-arrow-left" aria-hidden="true"></i>-->
+                                            </button>
+                                            <button class="btn btn-default btn-next pull-left" ng-click="GoNextPage();">
+                                                <!--<i class="fa fa-long-arrow-right" aria-hidden="true"></i>-->
+                                            </button>*@
+                                        @*<button class="btn btn-default btn-export pull-right">
+                                                Excel Export
+                                            </button>*@
+                                    </div>
+                                    <div id="postTableGesamtContainer" class="right">
+                                        <div id="postTable10ProPage">
+                                            <ul uib-pagination boundary-links="true" total-items="item_count" ng-model="page" items-per-page="page_size" class="pagination-sm right"
+                                                template-url="/scripts/widget/pagination.html" ng-change="onPageChange()" rotate="true" max-size="5"></ul>
+                                            @*<span>Total number of posts: <span>707</span></span>*@
+                                            @*<a href="#"
+                                                   onclick="try { optionsPTGP.pageSize = 10; chartPTGP.draw(viewPTGP, optionsPTGP); $(this).hide(); return false; } catch(e) { return false; }"
+                                                   style="margin-left: 10px;" class="noPrint">
+                                                    <!--
+                                                    -->
+                                                    Show 10 posts per page
+                                                </a>
+                                                <a href="#"
+                                                   onclick="try { optionsPTGP.page = 'disable'; optionsPTGP.pageSize = 1000; chartPTGP.draw(viewPTGP, optionsPTGP); $(this).hide(); $('#postTableGesamtContainer').hide(); return false; } catch(e) { return false; }"
+                                                   style="margin-left: 10px;" class="noPrint">
+                                                    <!--
+                                                    -->
+                                                    Show all posts
+                                                </a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Từ được sử dụng nhiều nhất-->
+                <div class="detail_container moreText">
+                    <h3 class="lable"><span></span>Những từ được sử dụng nhiều nhất</h3>
+                    <div class="chart-container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="chart-center-note w100pt left">
+                                    <div class="chart-content-sameInnerHeight postCloudPanel_container cf" style="height: auto;">
+                                        <span  ng-show="listWord!=''" class="postCloudPanel_wortContainer well" ng-repeat="word in listWord">
+                                            <span style="font-size:1.3em; color:#00bfa5;">{{ word.word }}</span>
+                                        </span>
+                                        <span ng-show="listWord==''">
+                                            <span style="font-size:1.3em; color:#00bfa5;">Dữ liệu yêu cầu trống!</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Từ được sử dụng nhiều nhất-->
+                <div class="two-tab-content left" style="width: 100%;" ng-show="HashTags!=null">
+                    <div class="detail_container hashtags">
+                        <h3 class="lable"><span></span>HASHTAGS được sử dụng</h3>
+                        <div class="chart-container" style="min-height: 100px;">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="chart-center-note w100pt left">
+                                        <div class="chart-content-sameInnerHeight postCloudPanel_container cf">
+                                            @*<span class="postCloudPanel_wortContainer">
+                                                    <span style="font-size:0.9em; color:#f15822;">đã</span>
+                                                </span>*@
+                                            <span class="postCloudPanel_wortContainer well" ng-repeat="HashTag in HashTags">
+                                                <span style="font-size: 1.1em; color:#f15822">{{ HashTag.word }}</span>
+                                            </span>
+                                        </div>
+                                        @*<div class="analytics_chartLegend">
+                                                <div class="analytics_chartLegendItem">size = frequency</div>
+                                                <div class="analytics_chartLegendItemGreen">
+                                                    green = high engagement
+                                                </div>
+                                                <div class="analytics_chartLegendItemRed">red = low engagement</div>
+                                            </div>*@
+                                    </div>
+                                    @*<div class="chart-footer-note w100pt left">
+                                            <p>Which topics and phrases do appear most often?</p>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail_container nguonSD">
+                        <h3 class="lable"><span></span>các nguồn sử dụng</h3>
+                        <div class="chart-container" style="min-height: 100px;">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="chart-content-sameInnerHeight w100pt left">
+
+                                        @*<div class="chart-content-sameInnerHeight cf"
+                                                 style="padding: 10px 0px; min-height: 146px;">
+                                                <div style="float: left;">
+                                                    <div class="nameSP">feedy.tv</div>
+                                                    <div class="logoSD"><img src="/Content/img-demo/logo-feedy.jpg"></div>
+                                                </div>
+                                            </div>*@
+                                        @*<div class="analytics_chartLegend">
+                                                <div class="analytics_chartLegendItem">size = frequency</div>
+                                                <div class="analytics_chartLegendItemGreen">
+                                                    green = high engagement
+                                                </div>
+                                                <div class="analytics_chartLegendItemRed">red = low engagement</div>
+                                            </div>*@
+                                    </div>
+                                    @*<div class="chart-footer-note w100pt left">
+                                            <p>Which topics and phrases do appear most often?</p>
+                                        </div>*@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Top-->
+                <div class="three-tab-content left">
+                    <div class="detail_container topLike">
+                        <h3 class="lable"><span></span>Top Like</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLike[0].link }}">{{ listTopLike[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[0].link }}">
+                                                        {{ listTopLike[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[0].type=='photo' || listTopLike[0].type=='link'">
+                                                    <img ng-src="{{ listTopLike[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLike[0].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLike[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLike[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLike[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLike[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLike[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLike[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLike[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLike[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLike[1].link }}">{{ listTopLike[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[1].link }}">
+                                                        {{ listTopLike[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[1].type=='photo' || listTopLike[1].type=='link'">
+                                                    <img ng-src="{{ listTopLike[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLike[1].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLike[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLike[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLike[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLike[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLike[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLike[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLike[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLike[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLike[2].link }}">{{ listTopLike[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[2].link }}">
+                                                        {{ listTopLike[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[2].type=='photo' || listTopLike[2].type=='link'">
+                                                    <img ng-src="{{ listTopLike[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLike[2].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLike[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLike[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLike[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLike[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLike[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLike[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLike[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLike[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLike[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail_container topLove">
+                        <h3 class="lable"><span></span>Top Love</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLove[0].link }}">{{ listTopLove[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLove[0].link }}">
+                                                        {{ listTopLove[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[0].type=='photo' || listTopLove[0].type=='link'">
+                                                    <img ng-src="{{ listTopLove[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLove[0].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLove[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLove[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLove[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLove[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLove[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLove[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLove[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLove[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLove[1].link }}">{{ listTopLove[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLove[1].link }}">
+                                                        {{ listTopLove[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[1].type=='photo' || listTopLove[1].type=='link'">
+                                                    <img ng-src="{{ listTopLove[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLove[1].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLove[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLove[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLove[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLove[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLove[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLove[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLove[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLove[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopLove[2].link }}">{{ listTopLove[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopLove[2].link }}">
+                                                        {{ listTopLove[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[2].type=='photo' || listTopLove[2].type=='link'">
+                                                    <img ng-src="{{ listTopLove[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopLove[2].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopLove[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopLove[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopLove[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopLove[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopLove[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLove[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopLove[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopLove[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopLove[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail_container tophaha">
+                        <h3 class="lable"><span></span>Top Haha</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopHaha[0].link }}">{{ listTopHaha[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopHaha[0].link }}">
+                                                        {{ listTopHaha[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[0].type=='photo' || listTopHaha[0].type=='link'">
+                                                    <img ng-src="{{ listTopHaha[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopHaha[0].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopHaha[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopHaha[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopHaha[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopHaha[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopHaha[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopHaha[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopHaha[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopHaha[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopHaha[1].link }}">{{ listTopHaha[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopHaha[1].link }}">
+                                                        {{ listTopHaha[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[1].type=='photo' || listTopHaha[1].type=='link'">
+                                                    <img ng-src="{{ listTopLike[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopHaha[1].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopHaha[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopHaha[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopHaha[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopHaha[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopHaha[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopHaha[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopHaha[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopHaha[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopHaha[2].link }}">{{ listTopHaha[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopHaha[2].link }}">
+                                                        {{ listTopHaha[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[2].type=='photo' || listTopHaha[2].type=='link'">
+                                                    <img ng-src="{{ listTopHaha[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopHaha[2].link }}" data-allowfullscreen="true" data-width="297">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopHaha[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopHaha[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopHaha[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopHaha[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopHaha[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopHaha[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopHaha[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopHaha[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopHaha[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Top-->
+                <div class="three-tab-content left">
+                    <div class="detail_container topWow">
+                        <h3 class="lable"><span></span>Top Wow</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopWow[0].link }}">{{ listTopWow[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopWow[0].link }}">
+                                                        {{ listTopWow[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[0].type=='photo' || listTopWow[0].type=='link'">
+                                                    <img ng-src="{{ listTopWow[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopWow[0].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopWow[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopWow[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopWow[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopWow[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopWow[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopWow[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopWow[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopWow[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopWow[1].link }}">{{ listTopWow[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopWow[1].link }}">
+                                                        {{ listTopWow[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[1].type=='photo' || listTopWow[1].type=='link'">
+                                                    <img ng-src="{{ listTopWow[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopWow[1].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopWow[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopWow[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopWow[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopWow[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopWow[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopWow[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopWow[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopWow[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopWow[2].link }}">{{ listTopWow[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopWow[2].link }}">
+                                                        {{ listTopWow[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[2].type=='photo' || listTopWow[2].type=='link'">
+                                                    <img ng-src="{{ listTopWow[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopWow[2].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopWow[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopWow[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopWow[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopWow[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopWow[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopWow[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopWow[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopWow[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopWow[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail_container topSad">
+                        <h3 class="lable"><span></span>Top Sad</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopSad[0].link }}">{{ listTopSad[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopSad[0].link }}">
+                                                        {{ listTopSad[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[0].type=='photo' || listTopSad[0].type=='link'">
+                                                    <img ng-src="{{ listTopSad[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopSad[0].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopSad[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopSad[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopSad[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopSad[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopSad[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopSad[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopSad[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopSad[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopSad[1].link }}">{{ listTopSad[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopSad[1].link }}">
+                                                        {{ listTopSad[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[1].type=='photo' || listTopSad[1].type=='link'">
+                                                    <img ng-src="{{ listTopSad[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopSad[1].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopSad[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopSad[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopSad[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopSad[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopSad[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopSad[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopSad[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopSad[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopSad[2].link }}">{{ listTopSad[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopSad[2].link }}">
+                                                        {{ listTopSad[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[2].type=='photo' || listTopSad[2].type=='link'">
+                                                    <img ng-src="{{ listTopSad[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopSad[2].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopSad[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopSad[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopSad[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopSad[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopSad[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopSad[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopSad[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopSad[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopSad[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail_container topAnger">
+                        <h3 class="lable"><span></span>Top anger</h3>
+                        <div class="chart-container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <section class="lazy owl-carousel owl-theme slider">
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopAnger[0].link }}">{{ listTopAnger[0].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopAnger[0].link }}">
+                                                        {{ listTopAnger[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[0].type=='photo' || listTopAnger[0].type=='link'">
+                                                    <img ng-src="{{ listTopAnger[0].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[0].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopAnger[0].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[0].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopAnger[0].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopAnger[0].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopAnger[0].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopAnger[0].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopAnger[0].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopAnger[0].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopAnger[0].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopAnger[0].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopAnger[1].link }}">{{ listTopAnger[1].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopAnger[1].link }}">
+                                                        {{ listTopAnger[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[1].type=='photo' || listTopAnger[1].type=='link'">
+                                                    <img ng-src="{{ listTopAnger[1].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[1].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopAnger[1].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[1].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopAnger[1].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopAnger[1].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopAnger[1].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopAnger[1].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopAnger[1].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopAnger[1].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopAnger[1].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopAnger[1].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="postPanel_container cf  postPanel_withPicture">
+                                            <div class="postPanel_contentContainer">
+                                                <div class="postPanel_header">
+                                                    <div class="postPanel_userImageContainer">
+                                                        <img ng-src="{{ DetailGroup.group_avatar }}">
+                                                    </div>
+                                                    <a target="_blank"
+                                                       class="postPanel_linkToPage profile_id_267864890225693"
+                                                       href="http://www.facebook.com/{{ DetailGroup.facebook_id }}">{{ DetailGroup.group_name }}</a>
+                                                    <span>shared a</span>
+                                                    <a target="_blank"
+                                                       href="{{ listTopAnger[2].link }}">{{ listTopAnger[2].type }}</a>
+                                                    <span></span><span> - </span>
+                                                    <a target="_blank" class="postPanel_date" href="{{ listTopAnger[2].link }}">
+                                                        {{ listTopAnger[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                                                    </a>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[2].type=='photo' || listTopAnger[2].type=='link'">
+                                                    <img ng-src="{{ listTopAnger[2].full_picture }}" style="width: 335px; max-height: 303px;" />
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[2].type=='video'">
+                                                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                                                         data-href="{{ listTopAnger[2].link }}" data-width="297" data-allowfullscreen="true">
+                                                    </div>
+                                                </div>
+                                                <div class="postPanel_videoContainer" ng-show="listTopAnger[2].type=='status'"></div>
+                                                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                                                    <p>{{ listTopAnger[2].content }}</p>
+                                                </div>
+                                                <div class="postPanel_dataContainer">
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_likeIcon"
+                                                              title="Likes"></span><span>{{ listTopAnger[2].like_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_loveIcon"
+                                                              title="Love"></span><span>{{ listTopAnger[2].love_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_hahaIcon"
+                                                              title="Haha"></span><span>{{ listTopAnger[2].haha_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopAnger[2].wow_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_commentIcon"
+                                                              title="Comments"></span><span>{{ listTopAnger[2].comment_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_angerIcon"
+                                                              title="Anger"></span><span>{{ listTopAnger[2].anger_count }}</span>
+                                                    </span>
+                                                    <span class="postPanel_actionIconContainer">
+                                                        <span class="postPanel_icon postPanel_shareIcon"
+                                                              title="Shares"></span><span>{{ listTopAnger[2].share_count }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="box-footer">
+                                        <span>3 tin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,204 @@
+﻿
+<div class="col-xs-12" ng-show="listTopLike[0]==null && listTopLike[1]==null && listTopLike[2]==null">
+    <p class="alert-no-result">Không tìm thấy kết quả phù hợp!</p>
+</div>
+<div class="col-xs-12" ng-hide="listTopLike[0]==null && listTopLike[1]==null && listTopLike[2]==null">
+    <section class="lazy owl-carousel owl-theme slider">
+        <div class="postPanel_container cf  postPanel_withPicture" ng-show="listTopLike[0]!=null" ng-cloak>
+            <div class="postPanel_contentContainer">
+                <div class="postPanel_header">
+                    <div class="postPanel_userImageContainer">
+                        <img ng-src="{{ DetailPage.page_avatar }}">
+                    </div>
+                    <a target="_blank"
+                       class="postPanel_linkToPage profile_id_267864890225693"
+                       href="http://www.facebook.com/{{ DetailPage.facebook_id }}">{{ DetailPage.page_name }}</a>
+                    <span>shared a</span>
+                    <a target="_blank"
+                       href="{{ listTopLike[0].link }}">{{ listTopLike[0].type }}</a>
+                    <span></span><span> - </span>
+                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[0].link }}">
+                        {{ listTopLike[0].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                    </a>
+                </div>
+                <div class="postPanel_videoContainer" ng-show="listTopLike[0].type=='photo' || listTopLike[0].type=='link' || listTopLike[0].type=='status' || listTopLike[0].type=='event'">
+                    <img ng-show="listTopLike[0].full_picture!=null" ng-src="{{ listTopLike[0].full_picture }}" class="box-top-image" />
+                    <img ng-show="listTopLike[0].full_picture==null" src="~/Content/develop/images/no-image-found.jpg" class="box-top-image" />
+                </div>
+                <div class="postPanel_videoContainer box-top-video" ng-show="listTopLike[0].type=='video'">
+                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                         data-href="{{ listTopLike[0].link }}" data-width="297" data-allowfullscreen="true">
+                    </div>
+                </div>
+                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                    <p class="box-content">{{ listTopLike[0].content }}</p>
+                </div>
+                <div class="postPanel_dataContainer">
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_likeIcon"
+                              title="Likes"></span><span>{{ listTopLike[0].like_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_loveIcon"
+                              title="Love"></span><span>{{ listTopLike[0].love_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_hahaIcon"
+                              title="Haha"></span><span>{{ listTopLike[0].haha_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_wowIcon"
+                              title="Wow"></span><span>{{ listTopLike[0].wow_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_sorryIcon"
+                              title="Sad"></span><span>{{ listTopLike[0].sad_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_angerIcon"
+                              title="Anger"></span><span>{{ listTopLike[0].anger_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_commentIcon"
+                              title="Comments"></span><span>{{ listTopLike[0].comment_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_shareIcon"
+                              title="Shares"></span><span>{{ listTopLike[0].share_count }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="postPanel_container cf  postPanel_withPicture" ng-show="listTopLike[1]!=null" ng-cloak>
+            <div class="postPanel_contentContainer">
+                <div class="postPanel_header">
+                    <div class="postPanel_userImageContainer">
+                        <img ng-src="{{ DetailPage.page_avatar }}">
+                    </div>
+                    <a target="_blank"
+                       class="postPanel_linkToPage profile_id_267864890225693"
+                       href="http://www.facebook.com/{{ DetailPage.facebook_id }}">{{ DetailPage.page_name }}</a>
+                    <span>shared a</span>
+                    <a target="_blank"
+                       href="{{ listTopLike[1].link }}">{{ listTopLike[1].type }}</a>
+                    <span></span><span> - </span>
+                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[1].link }}">
+                        {{ listTopLike[1].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                    </a>
+                </div>
+                <div class="postPanel_videoContainer" ng-show="listTopLike[1].type=='photo' || listTopLike[1].type=='link' || listTopLike[1].type=='status' || listTopLike[1].type=='event'">
+                    <img ng-show="listTopLike[1].full_picture!=null" ng-src="{{ listTopLike[1].full_picture }}" class="box-top-image" />
+                    <img ng-show="listTopLike[1].full_picture==null" src="~/Content/develop/images/no-image-found.jpg" class="box-top-image" />
+                </div>
+                <div class="postPanel_videoContainer box-top-video" ng-show="listTopLike[1].type=='video'">
+                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                         data-href="{{ listTopLike[1].link }}" data-allowfullscreen="true" data-width="297">
+                    </div>
+                </div>
+                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                    <p class="box-content">{{ listTopLike[1].content }}</p>
+                </div>
+                <div class="postPanel_dataContainer">
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_likeIcon"
+                              title="Likes"></span><span>{{ listTopLike[1].like_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_loveIcon"
+                              title="Love"></span><span>{{ listTopLike[1].love_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_hahaIcon"
+                              title="Haha"></span><span>{{ listTopLike[1].haha_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLike[1].wow_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_sorryIcon"
+                              title="Sad"></span><span>{{ listTopLike[1].sad_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_angerIcon"
+                              title="Anger"></span><span>{{ listTopLike[1].anger_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_commentIcon"
+                              title="Comments"></span><span>{{ listTopLike[1].comment_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_shareIcon"
+                              title="Shares"></span><span>{{ listTopLike[1].share_count }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="postPanel_container cf  postPanel_withPicture" ng-show="listTopLike[2]!=null" ng-cloak>
+            <div class="postPanel_contentContainer">
+                <div class="postPanel_header">
+                    <div class="postPanel_userImageContainer">
+                        <img ng-src="{{ DetailPage.page_avatar }}">
+                    </div>
+                    <a target="_blank"
+                       class="postPanel_linkToPage profile_id_267864890225693"
+                       href="http://www.facebook.com/{{ DetailPage.facebook_id }}">{{ DetailPage.page_name }}</a>
+                    <span>shared a</span>
+                    <a target="_blank"
+                       href="{{ listTopLike[2].link }}">{{ listTopLike[2].type }}</a>
+                    <span></span><span> - </span>
+                    <a target="_blank" class="postPanel_date" href="{{ listTopLike[2].link }}">
+                        {{ listTopLike[2].facebook_created_at | date: "dd/MM/yyyy HH:mm" }}
+                    </a>
+                </div>
+                <div class="postPanel_videoContainer" ng-show="listTopLike[2].type=='photo' || listTopLike[2].type=='link' || listTopLike[2].type=='status' || listTopLike[2].type=='event'">
+                    <img ng-show="listTopLike[2].full_picture!=null" ng-src="{{ listTopLike[2].full_picture }}" class="box-top-image" />
+                    <img ng-show="listTopLike[2].full_picture==null" src="~/Content/develop/images/no-image-found.jpg" class="box-top-image" />
+                </div>
+                <div class="postPanel_videoContainer box-top-video" ng-show="listTopLike[2].type=='video'">
+                    <div class="postPanel_videoPost fb-video fb_iframe_widget fb_iframe_widget_fluid_desktop"
+                         data-href="{{ listTopLike[2].link }}" data-allowfullscreen="true" data-width="297">
+                    </div>
+                </div>
+                <div class="postPanel_textContainer postPanel-textContainer-videoContainerVisible">
+                    <p class="box-content">{{ listTopLike[2].content }}</p>
+                </div>
+                <div class="postPanel_dataContainer">
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_likeIcon"
+                              title="Likes"></span><span>{{ listTopLike[2].like_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_loveIcon"
+                              title="Love"></span><span>{{ listTopLike[2].love_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_hahaIcon"
+                              title="Haha"></span><span>{{ listTopLike[2].haha_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_wowIcon" title="Wow"></span><span>{{ listTopLike[2].wow_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_sorryIcon"
+                              title="Sad"></span><span>{{ listTopLike[2].sad_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_angerIcon"
+                              title="Anger"></span><span>{{ listTopLike[2].anger_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_commentIcon"
+                              title="Comments"></span><span>{{ listTopLike[2].comment_count }}</span>
+                    </span>
+                    <span class="postPanel_actionIconContainer">
+                        <span class="postPanel_icon postPanel_shareIcon"
+                              title="Shares"></span><span>{{ listTopLike[2].share_count }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="box-footer">
+        <span>3 tin</span>
+    </div>
+</div>

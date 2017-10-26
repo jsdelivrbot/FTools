@@ -1,0 +1,262 @@
+﻿@{ 
+    var userId = Session["EmployeeId"] != null ? Session["EmployeeId"].ToString() : "";
+}
+<div class="menuLeft left" ng-controller="MenuController" ng-init="userId='@userId'; init();">
+    <nav class="navbar menuLeftIn">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                @*<a href="/dashboard.html" class="active dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f1 iconMenu"></div>
+                    <span>Bảng</span>
+                </a>*@
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                    <img src="~/Content/develop/images/logo-menu.png" alt="logo menu"/>
+                </a>
+                <ul class="dropdown-menu border " style="min-width: 643px; padding: 0px!important;">
+                    <li class="menu-item" ng-click="checkLogin('/chat.html');">
+                        <a class="icon">
+                            <i class="fa fa-envelope"
+                               style="color: rgb(244, 67, 54);"></i>
+                        </a>
+                        <a class="name"><span class="title"> Hội thoại </span></a>
+                    </li>
+                    @*<li class="menu-item " ng-click="checkLogin('https://chat.fb.sale/customer');">
+                        <a href="#" class="icon">
+                            <i class="fa fa-users"
+                               style="color: rgb(33, 150, 243);"></i>
+                        </a><a href="#" class="name"><span class="title"> Khách hàng </span></a>
+                    </li>*@
+                    <li class="menu-item " ng-click="checkLogin('https://chat.fb.sale/postlist')">
+                        <a href="#" class="icon">
+                            <i class="fa fa-newspaper-o"
+                               style="color: rgb(76, 175, 80);"></i>
+                        </a><a href="#" class="name"><span class="title"> Bài viết </span></a>
+                    </li>
+                    <li class="menu-item " ng-click="checkLogin('https://chat.fb.sale/config');">
+                        <a href="#" class="icon">
+                            <i class="fa fa-cogs"
+                               style="color: rgb(255, 152, 0);"></i>
+                        </a><a href="#" class="name"><span class="title"> Cài đặt </span></a>
+                    </li>
+                    @*<li class="menu-item" ng-click="checkLogin('/cms.html')">
+                        <a class="icon" href="#">
+                            <i class="fa fa-shopping-basket" style="color: rgb(0, 150, 136);"></i>
+                        </a>
+                        <a class="name" href="#"><span class="title"> CMS </span></a>
+                    </li>*@
+                    <li class="menu-item">
+                        <a class="icon" href="/cms-lite.html">
+                            <i class="fa fa-bar-chart" style="color: rgb(190, 230, 141);"></i>
+                        </a>
+                        <a class="name" href="/cms-lite.html"><span class="title"> Quản lý bán hàng </span></a>
+                    </li>
+                    <li class="menu-item active">
+                        <a class="icon" href="/">
+                            <i class="fa fa-line-chart" style="color: rgb(232, 20, 187);"></i>
+                        </a>
+                        <a class="name" href="/"><span class="title"> Phân tích Page </span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="chats" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Chưa đọc </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Chưa đọc">
+                    <i class="fa fa-eye-slash"></i>
+                </a>
+            </li>
+            <li class="item-phone" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Chưa trả lời </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Chưa trả lời">
+                    <i class="fa fa-reply-all"></i>
+                </a>
+            </li>
+            <li class="item-phone" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Lọc có chứa số điện thoại </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Lọc có chứa số điện thoại">
+                    <i class="fa fa-phone-square"></i>
+                </a>
+            </li>
+            <li class="item-tags" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Lọc theo nhãn </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Lọc theo nhãn">
+                    <i class="fa fa-tags"></i>
+                </a>
+            </li>
+            <li class="item-calendar" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Lọc theo ngày </md-tooltip>*@
+                <a href="#"  data-toggle="tooltip" data-placement="right" title="Lọc theo ngày">
+                    <i class="fa fa-calendar"></i>
+                </a>
+            </li>
+            <li class="item-black-tie" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Danh sách chặn </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Danh sách chặn">
+                    <i class="fa fa-black-tie" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="item-file-text" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Lọc theo bài viết </md-tooltip>*@
+                <a href="#"  data-toggle="tooltip" data-placement="right" title="Lọc theo bài viết">
+                    <i class="fa fa-file-text-o"></i>
+                </a>
+            </li>
+            <li class="item-th" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Lọc theo page </md-tooltip>*@
+                <a href="#"  data-toggle="tooltip" data-placement="right" title="Lọc theo Page">
+                    <i class="fa fa-th"></i>
+                </a>
+            </li>
+            <li class="item-undo" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="right"> Bỏ lọc </md-tooltip>*@
+                <a href="#" data-toggle="tooltip" data-placement="right" title="Bỏ lọc" >
+                    <i class="fa fa-undo"></i>
+                </a>
+            </li>
+        </ul>
+        @*<ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/Content/develop/images/logo-menu.png">
+                </a>
+                <ul class="dropdown-menu border ">
+                    <li class="menu-item active">
+                        <a class="icon">
+                            <i class="fa fa-envelope"
+                               style="color: rgb(51, 204, 0);"></i>
+                        </a><a class="name"><span class="title"> Hội thoại </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-newspaper-o"
+                               style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name"><span class="title"> Bài viết </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-cogs"
+                               style="color: rgb(102, 0, 153);"></i>
+                        </a><a class="name"><span class="title"> Cài đặt </span></a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="icon" href="https://fb.sale/home.html">
+                            <i class="fa fa-shopping-basket" style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name" href="/cms"><span class="title"> CMS </span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="tableinfo dropdown">
+                <a href="#" class="active dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f1 iconMenu"></div>
+                    <span>Bảng</span>
+                </a>
+                <ul class="dropdown-menu border ">
+                    <li class="menu-item active">
+                        <a class="icon">
+                            <i class="fa fa-envelope"
+                               style="color: rgb(51, 204, 0);"></i>
+                        </a><a class="name"><span class="title"> Hội thoại </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-newspaper-o"
+                               style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name"><span class="title"> Bài viết </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-cogs"
+                               style="color: rgb(102, 0, 153);"></i>
+                        </a><a class="name"><span class="title"> Cài đặt </span></a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="icon" href="https://fb.sale/home.html">
+                            <i class="fa fa-shopping-basket" style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name" href="/cms"><span class="title"> CMS </span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="detail dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f2 iconMenu"></div>
+                    <span>Chi tiết</span>
+                </a>
+                <ul class="dropdown-menu border ">
+                    <li class="menu-item active">
+                        <a class="icon">
+                            <i class="fa fa-envelope"
+                               style="color: rgb(51, 204, 0);"></i>
+                        </a><a class="name"><span class="title"> Hội thoại </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-newspaper-o"
+                               style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name"><span class="title"> Bài viết </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-cogs"
+                               style="color: rgb(102, 0, 153);"></i>
+                        </a><a class="name"><span class="title"> Cài đặt </span></a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="icon" href="https://fb.sale/home.html">
+                            <i class="fa fa-shopping-basket" style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name" href="/cms"><span class="title"> CMS </span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="giamsat dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f3 iconMenu"></div>
+                    <span>Giám sát</span>
+                </a>
+            </li>
+            <li class="tags dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f4 iconMenu"></div>
+                    <span>Gắn thẻ</span>
+                </a>
+                <ul class="dropdown-menu border ">
+                    <li class="menu-item active">
+                        <a class="icon">
+                            <i class="fa fa-envelope"
+                               style="color: rgb(51, 204, 0);"></i>
+                        </a><a class="name"><span class="title"> Hội thoại </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-newspaper-o"
+                               style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name"><span class="title"> Bài viết </span></a>
+                    </li>
+                    <li class="menu-item ">
+                        <a class="icon">
+                            <i class="fa fa-cogs"
+                               style="color: rgb(102, 0, 153);"></i>
+                        </a><a class="name"><span class="title"> Cài đặt </span></a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="icon" href="https://fb.sale/home.html">
+                            <i class="fa fa-shopping-basket" style="color: rgb(0, 102, 255);"></i>
+                        </a><a class="name" href="/cms"><span class="title"> CMS </span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="google-Analytics dropdown">
+                <a href="#" class=" dropdown-toggle" data-toggle="dropdown">
+                    <div class="icon-f5 iconMenu"></div>
+                    <span>Google Analytics </span>
+                </a>
+            </li>
+            <li class="like dropdown">
+                <a href="#" class=" dropdown-toggle" data-toggle="dropdown">
+                    <span>Like</span>
+                </a>
+            </li>
+        </ul>*@
+    </nav>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,769 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FTOOL - Analytic Facebook</title>
+    <meta name="description" content="FTOOL - Phân tích dữ liệu fanpage và group trên facebook">
+    <meta name="author" content="ftool - eyeplus online ">
+    
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/Content/dist/css/bootstrap.min.css" type="text/css">
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800">
+    
+    <link rel="stylesheet" href="/Content/dist/css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="/Content/develop/css/styleMainHome.css" type="text/css">
+    <link rel="stylesheet" href="/Content/develop/css/reponsize.css" type="text/css">
+    <link href="~/Content/develop/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/develop/css/owl.theme.default.css" rel="stylesheet" />
+    <link href="/Content/develop/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/Content/dist/js/html5shiv.js"></script>
+    <script src="/Content/dist/js/respond.min.js"></script>
+    <![endif]-->
+
+    @Styles.Render("~/Content/css")
+    <style type="text/css">
+        .owl-carousel .owl-item img {
+            width: 60px;
+            display: inline-block;
+            margin: 5px 5px;
+        }
+
+        .owl-carousel .owl-item span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            text-align: center;
+        }
+        .owl-stage .owl-item {
+            /*text-align: center;*/
+            border: 1px solid #eeeeee;
+            border-radius: 3px;
+            background-color: #eaebed;
+            height: 70px;
+        }
+
+        .title-new-page {
+            line-height: 26px;
+            font-size: 20px;
+            color: #01639c;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 25px 0px;
+            margin: 0px;
+        }
+
+        .box-text-newpage {
+            margin: 10px 0px;           
+        }
+
+        .box-text-newpage span i,strong {
+            color: black;
+        }
+
+    </style>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-104421158-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body>
+    <div ng-app="FToolApp" ng-cloak>
+        <div ng-controller="LandingPageController" ng-init="IsLogged = @ViewBag.IsLogged;Group = @ViewBag.Group; FacebookUserId = @ViewBag.FacebookUserId; init();">
+                <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand page-scroll" href="/"><img src="/Content/develop/images/logo.png" alt="logolayana"></a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                @*<li>
+                                    <button type="button" class="btn btn-login btn-lg" data-toggle="modal" data-target="#loginModal">
+                                        Đăng nhập
+                                    </button>
+                                </li>*@
+                                @Html.Partial("BoxLogin")
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a class="page-scroll" href="/">Trang chủ</a>
+                                </li>
+                                @*<li>
+                                    <a class="page-scroll" href="#services">Tính năng</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" href="#tableSell">Bảng giá</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" href="#appFb">Cài đặt App</a>
+                                </li>*@
+                                <li>
+                                    <a class="page-scroll" href="#footer">Hỗ trợ</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container -->
+                </nav>
+                <!-- Section Intro Slider
+            ================================================== -->
+                <div id="carousel-example-generic" class="carousel intro slide">
+                    <div class="carousel-inner" role="listbox" ng-controller="SearchController">
+                        <!-- First slide -->
+                        <div class="item active" style="background-image:url(/Content/develop/images/banner.jpg)">
+                            <div class="carousel-caption">
+                                <h1 data-animation="animated bounceInUp"> Phân tích fanpage, group mà bạn quan tâm</h1>
+                                <h2 data-animation="animated bounceInDown">
+                                    Với các chỉ số KPI cụ thể sẽ giúp bạn nắm bắt được thị hiếu , tầm ảnh hưởng và các phản hồi của người dùng. Bạn có thể dễ dàng theo dõi thông tin của đối thủ cạnh tranh và tăng phạm vi tiếp cận cho nội dung của mình trên MXH facebook hơn nữa.
+                                </h2>
+                                <h3>Bắt đầu phân tích của bạn bây giờ</h3>
+                                <div class="form-control form-search" data-animation="animated fadeInLeft">
+                                    <input class="inputSearch" type="text" placeholder="Nhập tên hoặc đường dẫn" input-enter="openSearch();" ng-model="textSearch" style="width:70%;">
+                                    <div class="selectP" style="position: relative">
+                                        <select class="singleSelect" name="selectSearch" ng-model="typeSearch" ng-init="typeSearch='0'" style="-webkit-appearance: none;-moz-appearance: none; width: 100%">
+                                            <option value="0" selected>Page</option>
+                                            <option value="1">Group</option>
+                                        </select>
+                                        <span class="fa fa-chevron-down icon-select" aria-hidden="true"></span>
+                                    </div>
+                                    <a class="btn btn-ghost btn-lg btn-primary" ng-click="openSearch();" style="width:10%;">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.item -->
+                    </div>
+                    <!-- /.carousel-inner -->
+                    <!-- Controls (currently displayed none from styleMainHome.css)-->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!-- /.carousel -->
+                <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div id="loginModal" class="modal fade popupLogin" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="col-lg-6 info-PM">
+                                    <a href="#" class="logo-pop dpib ovh" tabindex="-1">
+                                        <img src="/Content/develop/images/logo-fb.sale-1.png" alt="Salesmanager" title="Sales Manager">
+                                    </a>
+                                    <h1>Để quản lý bán hàng mọi lúc, mọi nơi, trên mọi thiết bị.</h1>
+                                    <p>
+                                        Giải pháp bán hàng qua SalesManager toàn diện, hiệu quả. Quản lý danh sách khách hàng, tin nhắn,
+                                        bình
+                                        luận, tình trạng đơn hàng, gửi hàng nhanh chóng trên web và di động
+                                    </p>
+                                    <!--<images src="/Content/images/desk.png">-->
+                                </div>
+                                <form class="col-lg-6 loginbox">
+                                    <section class="loginFr ovh vi-VN">
+                                        <h2> Đăng nhập</h2>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content import-Info">
+                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="w100pt input-group">
+                                                            <div class="label">
+                                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                            </div>
+                                                            <input type="email" class="form-control" id="txtLoginEmail"
+                                                                   placeholder="Email: fbsale@gmail.com">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="w100pt input-group">
+                                                            <div class="label">
+                                                                <i class="fa fa-key" aria-hidden="true"></i>
+                                                            </div>
+                                                            <input type="password" class="form-control" id="txtLoginPassword" input-enter="login();"
+                                                                   placeholder="* * * * *">
+                                                        </div>
+                                                    </div>
+                                                    <div class="checkbox left w100pt">
+                                                        <input id="checkbox1" class="styled" type="checkbox">
+                                                        <label for="checkbox1">Ghi nhớ mật khẩu</label>
+                                                    </div>
+                                                    <div class="form-group boxBt">
+                                                        <button type="submit" class="btn bt-login bg-green clfff" ng-click="login();">
+                                                            Đăng nhập
+                                                        </button>
+                                                        <a href="#" class="left cl-green bt-foget">Quên mật khẩu ?</a>
+                                                        <a href="#" class="right cl-green bt-resgiter">Đăng ký tại đây !</a>
+                                                        <div class="left w100pt logigFacebook">
+                                                            <h3>Hoặc đăng nhập bằng tài khoản sau:</h3>
+                                                            <button type="submit" class="btn bt-login-face" ng-click="loginFacebook();">
+                                                                Đăng nhập Facebook
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </form>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>         
+            
+
+            <div id="infoModal" class="modal fade popupLogin" role="dialog" tabindex="-1" data-keyboard="false">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="col-lg-6 info-PM">
+                                <a href="#" class="logo-pop dpib ovh" tabindex="-1">
+                                    @*<img src="dist/img/logo-fb.sale-1.png" alt="Salesmanager" title="Sales Manager">*@
+                                    <img src="#" alt="Salesmanager" title="Sales Manager">
+                                </a>
+                                <h1 translate="index.login_popup.popup_text1"></h1>
+                                <p translate="index.login_popup.popup_text2">
+
+                                </p>
+                                <!--<img src="develop/img/desk.png">-->
+                            </div>
+                            <form class="col-lg-6 loginbox">
+                                <section class="loginFr ovh vi-VN">
+
+                                    <h2 translate="common.yourinfo"></h2>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content import-Info">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <div class="w100pt input-group">
+                                                        <div class="label">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="txtFullName" ng-model="userInfo.FullName" ng-required="true"
+                                                               placeholder="{{ 'common.full_name' | translate }}">
+                                                        <span style="color:red;font-size:24px;line-height:44px;" class="err_msg" ng-show="userInfo.FullName == '' || userInfo.FullName == undefined">*</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="w100pt input-group">
+                                                        <div class="label">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="txtPhone" ng-model="userInfo.Phone" ng-required="true" ng-pattern="/^(09|08|012|016|84)(\d{8,9})$/"
+                                                               placeholder="{{ 'common.phone' | translate }}">
+                                                        <span style="color:red;font-size:24px;line-height:44px;" class="err_msg ng-hide" ng-show="(userInfo.Phone.$invalid && !userInfo.Phone.$pristine) || userInfo.Phone == '' || userInfo.Phone == undefined">*</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="w100pt input-group">
+                                                        <div class="label">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                                        </div>
+                                                        <input type="email" class="form-control" id="txtEmail" ng-model="userInfo.RegEmail" ng-required="true" ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@("@")[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                                                               placeholder="{{ 'common.email' | translate }}">
+                                                        <span style="color:red;font-size:24px;line-height:44px;" class="err_msg ng-hide" ng-show="(userInfo.RegEmail.$invalid && !userInfo.RegEmail.$pristine) || userInfo.RegEmail == '' || userInfo.RegEmail == undefined">*</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="w100pt input-group">
+                                                        <div class="label">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="txtAddress" ng-model="userInfo.Address"
+                                                               placeholder="{{ 'common.address' | translate }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="w100pt input-group">
+                                                        <div class="label">
+                                                            <i class="fa fa-home" aria-hidden="true"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="txtShopName" ng-model="userInfo.ShopName"
+                                                               placeholder="{{ 'common.shop_name' | translate }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group boxBt">
+                                                    <button type="button" class="btn bt-login bg-green clfff" ng-click="updateInfo();">
+                                                        {{ 'common.continue' | translate }}
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+
+                                </section>
+                            </form>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Section Services
+        ================================================== -->
+            <section id="services" class="services">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="select select--white right">
+                            <select class="form-control selectpicker" ng-model="crr_country" @*ng-init="q.selectCountry='0'"*@ ng-change="onQueryChange()" ;>
+                                <option value="0">Tất cả</option>
+                                <option ng-repeat="item in listCountry" value="{{ item.code }}">{{ item.name }}</option>
+                            </select>
+                        </div>
+                        <label class="right filter-title" style="margin: 3px 20px;">Quốc gia</label>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <!-- begin 1st row -->
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-01.png">
+                                </div>
+                                <h3>TOP page</h3>
+                                <p class="text-muted">
+                                    Tiêu chí đánh giá chủ yếu dựa trên số lượt like page . Bạn có thể theo dõi và cập nhật được xu hướng mà xã hội đang quan tâm qua thứ tự xếp hạng các page.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Page </h1>
+                                            <span class="like">Likes</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore top-page left w100pt">
+                                        <li ng-class-odd="'arrow odd'" ng-class-even="'arrow odd bge'" ng-repeat="listPage in listTopPages">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ listPage.page_id }}/page.html" title="{{ listPage.page_name }}">
+                                                    <img class="imgItem" ng-src="https://graph.facebook.com/{{listPage.facebook_id}}/picture?type=square"><span>{{ listPage.page_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ listPage.fan_count | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allpage.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- begin 2nd row -->
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-02.png">
+                                </div>
+                                <h3>Tốc độ tăng like trên ngày</h3>
+                                <p class="text-muted">
+                                    Thống kê lượt like tăng trong khoảng thời gian là một ngày để đánh giá xem page nào hoạt động có hiệu quả và tiếp cận tới nhiều người dùng nhất.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Page </h1>
+                                            <span class="like">Likes</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore tang-like left w100pt">
+                                        <li ng-repeat="listPageFan in listTopPagesFan">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ listPageFan.page_id }}/page.html" title="{{ listPageFan.page_name }}">
+                                                    <img class="imgItem" ng-src="https://graph.facebook.com/{{listPageFan.facebook_id}}/picture?type=square"><span>{{ listPageFan.page_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ listPageFan.fan_increase_yesterday | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allpage.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-pageNew1.png">
+                                </div>
+                                <h3>page mới</h3>
+                                <p class="text-muted">
+                                    Thống kê danh sách các page được mọi người tìm kiếm gần đây nhất.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Page </h1>
+                                            <span class="like">Likes</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore top-page left w100pt">
+                                        <li ng-class-odd="'arrow odd'" ng-class-even="'arrow odd bge'" ng-repeat="item in listNewPages">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ item.page_id }}/page.html" title="{{ item.page_name }}">
+                                                    <img class="imgItem" ng-src="https://graph.facebook.com/{{item.facebook_id}}/picture?type=square"><span>{{ item.page_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ item.fan_count | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allpage.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-item col-lg-4 col-md-6 text-center hidden">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-03.png">
+                                </div>
+                                <h3>Group nhiều thành viên nhất</h3>
+                                <p class="text-muted">
+                                    Thống kê số lượng thành viên của các nhóm trên facebook.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Group </h1>
+                                            <span class="like" style="width: 61px;">New</span>
+                                            <span class="like" style="width: 81px; border-right: none;">Member</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore ground left w100pt">
+                                        <li ng-repeat="listGroup in listTopGroups">
+                                            <span class="stt number">{{ ((page-1) * page_size) + $index + 1 }}</span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ listGroup.group_id }}/group.html" title="{{ listGroup.group_name }}">
+                                                    <img class="imgItem" ng-src="{{listGroup.group_avatar}}"><span>{{ listGroup.group_name }}</span>
+                                                </a>
+                                                <span class="like1" style="right: 51px; width: 81px; padding: 0px 5px;">{{ listGroup.members_count | formatPrice }}</span>
+                                                <span class="like1" style="width: 51px;">{{ listGroup.member_increase_yesterday | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allgroup.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end 1st row -->
+                    <br />
+                    <div class="row">
+                        <!-- begin 1st row -->
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-03.png">
+                                </div>
+                                <h3>Top Group</h3>
+                                <p class="text-muted">
+                                    Thống kê số lượng thành viên của các nhóm trên facebook.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Group </h1>
+                                            <span class="like">Member</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore tang-like left w100pt">
+                                        <li ng-repeat="item in listTopGroups">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ item.group_id }}/group.html" title="{{ item.group_name }}">
+                                                    <img class="imgItem" ng-src="{{ item.group_avatar }}"><span>{{ item.group_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ item.members_count | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allgroup.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- begin 2nd row -->
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-02.png">
+                                </div>
+                                <h3>TỐC ĐỘ TĂNG TRƯỞNG TRÊN NGÀY</h3>
+                                <p class="text-muted">
+                                    Thống kê số thành viên tăng trong khoảng thời gian là một ngày để đánh giá tình trạng hoạt động và tiếp cận người dùng của nhóm.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Group </h1>
+                                            <span class="like">New</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore tang-like left w100pt">
+                                        <li ng-repeat="item in listGroupByMemberIncrease">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ item.group_id }}/group.html" title="{{ item.group_name }}">
+                                                    <img class="imgItem" ng-src="{{ item.group_avatar }}"><span>{{ item.group_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ item.member_increase_yesterday | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allgroup.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-item col-lg-4 col-md-6 text-center">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-GrounpNew1.png">
+                                </div>
+                                <h3>Group mới</h3>
+                                <p class="text-muted">
+                                    Thống kê danh sách các group được mọi người tìm kiếm gần đây nhất. 
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Group </h1>
+                                            <span class="like">Member</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore tang-like left w100pt">
+                                        <li ng-repeat="item in listNewGroups">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="/detail/{{ item.group_id }}/group.html" title="{{ item.group_name }}">
+                                                    <img class="imgItem" ng-src="{{ item.group_avatar }}"><span>{{ item.group_name }}</span>
+                                                </a>
+                                                <span class="like1">{{ item.members_count | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allgroup.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-item col-lg-4 col-md-6 text-center hidden">
+                            <div class="service-box">
+                                <div class="iconbox">
+                                    <img src="/Content/develop/images/icon-03.png">
+                                </div>
+                                <h3>Bài viết tương tác cao nhất</h3>
+                                <p class="text-muted">
+                                    Thống kê các bài viết có tương cao nhất để phân tích xu hướng mà cộng đồng đang hướng tới.
+                                </p>
+                                <div class="boxlistItem left w100pt">
+                                    <ul class="list-item lable left w100pt">
+                                        <li>
+                                            <span class="stt">STT</span>
+                                            <h1> Post </h1>
+                                            <span class="like">Interaction</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-item listMore tang-like left w100pt">
+                                        <li ng-repeat="item in listNewPostOnSystem">
+                                            <span class="stt number"> {{ ((page-1) * page_size) + $index + 1 }} </span>
+                                            <h1 class="info-item">
+                                                <a href="{{ item.link }}" title="{{ item.content }}">
+                                                    <img class="imgItem" ng-src="{{ item.full_picture }}"><span>{{ item.content }}</span>
+                                                </a>
+                                                <span class="like1">{{ item.total_interaction | formatPrice }}</span>
+                                            </h1>
+                                        </li>
+                                    </ul>
+                                    <a class="" href="/allgroup.html">Xem tất cả</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row container">
+                        <div>
+                            <h1 class="title-new-page"><i class="fa fa-toggle-on" aria-hidden="true"></i> Page mới</h1>
+                        </div>
+                        <ng-owl-carousel class="owl-theme" owl-items="listNewPages" owl-properties="properties" owl-ready="ready($api)">
+                            <div data-ng-repeat="item in listNewPages">
+                                <a href="/detail/{{ item.page_id }}/page.html" title="{{ item.page_name }}">
+                                    <div class="col-md-4 no-padding">
+                                        <img class="imgItem" ng-src="{{item.page_avatar}}">
+                                    </div>
+                                    <div class="col-md-8 no-padding box-text-newpage">
+                                        <span>{{ item.page_name }}</span>
+                                        <span>
+                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                            <strong>{{ item.fan_count | formatPrice}}</strong>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </ng-owl-carousel>
+                    </div>
+                    <div class="row container">
+                        <div>
+                            <h1 class="title-new-page"><i class="fa fa-toggle-on" aria-hidden="true"></i> Group mới</h1>
+                        </div>
+                        <ng-owl-carousel class="owl-theme" owl-items="listNewGroups" owl-properties="properties" owl-ready="ready($api)">
+                            <div data-ng-repeat="item in listNewGroups">
+                                <a href="/detail/{{ item.group_id }}/group.html" title="{{ item.group_name }}">
+                                    <div class="col-md-4 no-padding">
+                                        <img class="imgItem" ng-src="{{item.group_avatar}}">
+                                    </div>
+                                    <div class="col-md-8 no-padding box-text-newpage">
+                                        <span>{{ item.group_name }}</span>
+                                        <span>
+                                            <i class="fa fa-users" aria-hidden="true"></i>
+                                            <strong>{{ item.members_count | formatPrice }}</strong>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </ng-owl-carousel>
+                    </div>*@
+            </section>
+
+            <!-- Section Footer
+        ================================================== -->
+            <section id="footer" class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 footer-contant">
+                            <div class="footer-info col-lg-3">
+                                <a href="#" class="left w100pt logoF"><img src="/Content/develop/images/Logo_Fsale-f.png"></a>
+                                <p>
+                                    Công cụ tuyệt vời giúp bạn đo lường và phân tích tiềm năng và hiệu quả của Fanpage. Cho phép bạn theo dõi, so sánh và tìm hiểu tất cả thông tin tiềm năng của fanpage trên MXH facebook.
+                                </p>
+                            </div>
+                            <div class="footer-listDM list1 col-lg-2 hide">
+                                <h2 class="footer-txt">Danh mục</h2>
+                                <ul>
+                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="#"> Tính năng, đặc điểm</a></li>
+                                    <li><a href="#"> Giá cả</a></li>
+                                    <li><a href="#"> Tài liệu tham khảo</a></li>
+                                    <li><a href="#"> Việc làm</a></li>
+                                    <li><a href="#"> Chương trình đối tác</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-listDM list2 col-lg-3 hide">
+                                <h2 class="footer-txt">Chính sách - điều khoản</h2>
+                                <ul>
+                                    <li><a href="#">Thông báo pháp lý / Liên hệ</a></li>
+                                    <li><a href="#">Chính sách bảo mật</a></li>
+                                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-listDM list3 col-lg-3 hide">
+                                <h2 class="footer-txt">Công cụ hữu ích</h2>
+                                <ul>
+                                    <li><a href="#">Cạnh tranh Good Luck Fairy</a></li>
+                                    <li><a href="#">So sánh trang fan hâm mộ</a></li>
+                                    <li><a href="#">Danh mục Facebook</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-share col-lg-1">
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <ul>
+                                    <li>
+                                        <a class="page-face" href="https://www.facebook.com/quanlybanhangFSale/"><i class="fa fa-facebook"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a class="page-twitter" href="#"><i class="fa fa-twitter"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a class="page-google" href="#"><i class="fa fa-google"></i></a>
+                                    </li>
+                                    <li class="likeFace w100pt left">
+                                        <a class="btn-Like" href="https://www.facebook.com/quanlybanhangFSale/">
+                                            <i class="fa fa-thumbs-up"> Like</i>
+                                        </a>
+                                        @*<img src="/Content/develop/images/like12.png">*@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyRight">copyRight 2017 by EyePlus Online</div>
+            </section>
+            <fb app-id='@Session["FBAppId"]'></fb>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="/Content/dist/js/jquery.js"></script>
+    <script src="/Content/dist/js/bootstrap.min.js"></script>
+    <script src="/Content/dist/js/jquery.easing.min.js"></script>
+    <script src="/Content/dist/js/wow.min.js"></script>
+    <script src="/Content/dist/js/common.js"></script>
+    <script src="/Content/develop/slick-master/slick.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Content/dist/js/owl.carousel.js"></script>
+
+    @Scripts.Render("~/bundles/angularjs")
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.js"></script>
+    <script src="https://fragaria.github.io/angular-daterangepicker/js/angular-daterangepicker.min.js"></script>
+    
+</body>
+</html>

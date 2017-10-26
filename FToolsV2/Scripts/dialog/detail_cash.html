@@ -1,0 +1,42 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModalCashDetail();">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title"><span class="fa fa-list-ul"></span>{{'common.cash_in_out' | translate}}</h4>
+</div>
+<div class="modal-body">
+    <div class="tab-content">
+        <div class="left w100pt info-product">
+            <!-- Nav tabs -->
+            <div class="left">
+                <div class="col-lg-6 info-product-tt">
+                    <ul>
+                        <li><span class="txt-left">{{'dashboard.cash_code' | translate}}:</span> {{ selectcash.CashCode}}</li>
+                        <li><span class="txt-left">{{'dashboard.time' | translate}} :</span> {{ selectcash.CreatedAt | date : "dd/MM/yyyy" }}</li>
+                        <li style="white-space: normal;"><span class="txt-left">{{'dashboard.content' | translate}} :</span> {{ selectcash.Title }} </li>
+                        <li><span class="txt-left">{{'dashboard.creator' | translate}} :</span> {{ selectcash.employee.EmployeeName }}</li>
+                        <li><span class="txt-left">{{ selectcash.cashType.Type == 0 | iif : ('placeholder.receiver' | translate) : ('cash.submitter' | translate) }} :</span>{{ selectcash.paidTarget.TargetName }}</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 info-product-tt last">
+                    <ul>
+                        <li><span class="txt-left">{{'dashboard.num_price' | translate}} :</span> {{  selectcash.PaidAmount | formatPrice }}</li>
+                        <li><span class="txt-left">{{'cash.name_cash_type' | translate}} :</span> {{ selectcash.Type==0 | iif : ('dashboard.payment_voucher' | translate) : ('dashboard.receipt_voucher' | translate) }}</li>
+                        <li style="border-bottom:0;"><span class="txt-left">{{'dashboard.note' | translate}} :</span> <textarea ng-model="selectcash.Note" rows="3" style="width:100%;"></textarea></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                {{ getMessage(selectcash); }}
+                <div class="clearfix"></div>
+                <button type="button" class="btn btn-success btn-update" ng-click="updateCash(selectcash);">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i> {{'common.update' | translate}}
+                </button>
+                <button type="button" class="btn btn-lock" ng-click="showConfirmCancelCashes(selectcash)" ng-show="selectcash.IsManual==1">
+                    <i class="fa fa-trash"
+                       aria-hidden="true" style="color:#fff"></i> {{'common.cancel' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

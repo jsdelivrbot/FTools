@@ -1,0 +1,175 @@
+﻿@{
+    var userId = Session["EmployeeId"] != null ? Session["EmployeeId"].ToString() : "";
+}
+
+<div id="header" class="header-full" ng-controller="MenuController" ng-init="userId='@userId'; init();">
+    <div class="container">
+        <ul class="nav nav-pills navbar-left tabChat" style="margin-left: 50px;">
+            <li class="" ng-click="checkLogin('/chat.html');">
+                @*<md-tooltip md-direction="bottom">Hội thoại</md-tooltip>*@
+                <a href="#" class="chatGroud" data-toggle="tooltip" data-placement="bottom" title="Hội thoại"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
+            </li>
+            @*<li>
+                <a href="#2a" class="userGroud" title="Chăm sóc khách hàng"><i class="fa fa-users" aria-hidden="true"></i></a>
+            </li>*@
+            <li ng-click="checkLogin('https://chat.fb.sale/postlist');">
+                @*<md-tooltip md-direction="bottom">Bài viết</md-tooltip>*@
+                <a href="#3a" class="newsAll" data-toggle="tooltip" data-placement="bottom" title="Bài viết"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+            </li>
+            <li ng-click="checkLogin('https://chat.fb.sale/config')">
+                @*<md-tooltip md-direction="bottom">Cài đặt</md-tooltip>*@
+                <a href="#4a" class="settingAll" data-toggle="tooltip" data-placement="bottom" title="Cài đặt"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+            </li>
+            <li ng-click="checkLogin('https://fb.sale/dashboard.html');">
+                @*<md-tooltip md-direction="bottom">Quản lý bán hàng</md-tooltip>*@
+                <a href="#5a" class="barChatGroud" data-toggle="tooltip" data-placement="bottom" title="Quản lý bán hàng"><i class="icon-menu-cms" aria-hidden="true"></i></a>
+            </li>
+            <li ng-click="checkLogin('https://fb.sale/report.html');">
+                @*<md-tooltip md-direction="bottom">Thống kê</md-tooltip>*@
+                <a href="#5a" class="barChatGroud" data-toggle="tooltip" data-placement="bottom" title="Thống kê"><i class="icon-menu-report" aria-hidden="true"></i></a>
+            </li>
+            <li ng-click="checkLogin('https://fb.sale/currenttime.html');">
+                @*<md-tooltip md-direction="bottom">Báo cáo tin nhắn</md-tooltip>*@
+                <a href="#5a" class="barChatGroud" data-toggle="tooltip" data-placement="bottom" title="Báo cáo tin nhắn"><i class="icon-menu-message" aria-hidden="true"></i></a>
+            </li>
+            <li class="active">
+                @*<md-tooltip md-direction="bottom">Phân tích Page</md-tooltip>*@
+                <a href="/" class="likeChatGroud" data-toggle="tooltip" data-placement="bottom" title="Phân tích Page"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+        <nav class="navbar navbar-right">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="/">Trang chủ</a>
+                    </li>
+
+                    @*<li>
+                        <a class="page-scroll" href="#services">Tính năng</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#tableSell">Bảng giá</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#appFb">Cài đặt App</a>
+                    </li>*@
+                    <li>
+                        <a class="page-scroll" href="#footer">Hỗ trợ</a>
+                    </li>
+                        @if (Session["EmployeeId"] != null)
+                        {
+                            <li>
+                                <p style="position: relative;display: block;padding: 13px 12px;color: #337ab7;"> @Session["EmployeeName"].ToString() - <a href="/logout.html"><i class="fa fa-sign-out" title="Đăng xuất" aria-hidden="true"></i></a></p>
+                            </li>
+                        }
+                    <li class="dropdown notifi hide">
+                        <a href="#" class="dropdown-toggle true" data-toggle="dropdown">
+                            <i class="ion-ios-bell-outline"></i><span> 3</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!--<div class="arrow-top"></div>-->
+                            <div class="lable-n">
+                                <h3 class="uiHeaderTitle" aria-hidden="true">Tất cả thông báo</h3>
+                            </div>
+                            <ul class="list-notifi">
+                                <li class="">
+                                    <a href="#" class="item-notifi">
+                                        <div class="avatar-acc">
+                                            <img src="/Content/img-demo/a1.jpg" alt="">
+                                        </div>
+                                        <div class="txt-notifi">
+                                            <h2>
+                                                <b>Vũ Đình Ngọc</b><span> đã gửi cho bạn một yêu cầu, đã gửi cho bạn một yêu cầu, đã gửi cho bạn một yêu cầu.</span>
+                                            </h2>
+                                            <p>31 phút trước</p>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#" class="item-notifi">
+                                        <div class="avatar-acc">
+                                            <img src="/Content/img-demo/a1.jpg"
+                                                 alt="">
+                                        </div>
+                                        <div class="txt-notifi">
+                                            <h2>
+                                                <b>Vũ Đình Ngọc</b><span> đã gửi cho bạn một yêu cầu, đã gửi cho bạn một yêu cầu, đã gửi cho bạn một yêu cầu.</span>
+                                            </h2>
+                                            <p>31 phút trước</p>
+                                        </div>
+
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="view-more-no">
+                                <a class="seeMore" href="#"
+                                   accesskey="5"><span>Xem tất cả</span></a>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown store-acc hide">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="avatar-acc-main">
+                                <img src="/Content/img-demo/avta.jpg"
+                                     alt="">
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu listACC">
+                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản của bạn</a></li>
+                            <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Cài đặt</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Thoát</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="header-searchContainer noPrint" id="idb6" ng-controller="SearchController">
+            <form class="form-inline header-search header_searchFanPage" id="idb7">
+                <div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden"><input type="hidden" name="idb7_hf_0" id="idb7_hf_0"></div>
+                <div class="header-searchFields">
+                    <div class="header-search-profileList">
+                        <a class="header-search-networkLink active" ng-class="" id="idTypePage" ng-model="changeTypePage" ng-click="changeTypeSearch(0);">
+                            <span title="Search for Facebook Fan page"> <b>P</b> </span>
+                        </a>
+                        <a class="header-search-networkLink" id="idTypeGroup" ng-model="changeTypeGroup" ng-click="changeTypeSearch(1);">
+                            <span title="Search for Facebook Group"> <b>G</b> </span>
+                        </a>
+                        @*<a class="header-search-networkLink" rel="nofollow" id="id9d" href="javascript:;"><span class="searchGplusIcon" title="Search for Google Plus profile"></span></a>
+                        <a class="header-search-networkLink" rel="nofollow" id="id9c" href="javascript:;"><span class="searchYoutubeIcon" title="Search for YouTube channel"></span></a>
+                        <a class="header-search-networkLink" rel="nofollow" id="id9e" href="javascript:;"><span class="searchInstagramIcon" title="Search for Instagram profile"></span></a>
+                        <a class="header-search-networkLink" rel="nofollow" id="id9f" href="javascript:;"><span class="searchPinterestIcon" title="Search for a Pinterest profile"></span></a>*@
+                    </div>
+                    <input class="header-search-input js-header-search-input" type="text" value="" name="fanPageNameField" id="idb8" placeholder="Nhập tên hoặc đường dẫn" ng-model="textSearch" input-enter="openSearch();">
+                </div>
+                <button type="submit" class="btn btn-default header-search-submitButton" ng-click="openSearch();">
+                    <i class="fa fa-search"></i>
+                </button>
+                @*<script type="text/javascript">var searchModus = 'fanpage';</script>
+                <script type="text/javascript">
+                    /*<![CDATA[*/
+
+                    $(function () {
+                        if (typeof enableSearchBar === "function") {
+                            enableSearchBar();
+                        } else {
+                            window.setTimeout(function () {
+                                if (typeof enableSearchBar === "function") { enableSearchBar(); }
+                            }, 10000);
+                        }
+                    });
+
+                    /*]]>*/
+                </script>*@
+                <!--[if lte IE 9]><script>
+                                    /*<![CDATA[*/
+            if(jQuery().placify) { $('form').placify(); }
+            /*]]>*/
+            </script><![endif]-->
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+

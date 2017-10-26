@@ -1,0 +1,49 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelCreate();">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title"><span class="fa fa-list-ul"></span>{{'dashboard.create_branch' | translate}}</h4>
+</div>
+<div class="modal-body" ng-form name="form.frmAddBranch">
+    <div class="form-group row">
+        <label>{{'dashboard.brach_name' | translate}}</label>
+        <div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="{{'branch.brach_name' | translate}}" ng-model="newBranch.BranchName" required=""
+                   aria-invalid="true">
+            <span class="err_msg" ng-show="newBranch.BranchName == '' || newBranch.BranchName == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>{{'common.address' | translate}}</label>
+        <div>
+            <input type="text"
+                   class="form-control"
+                   placeholder="{{'common.address' | translate}}" ng-model="newBranch.Address" required="" aria-invalid="true">
+            <span class="err_msg" ng-show="newBranch.Address == '' || newBranch.Address == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>{{'common.phone' | translate}}</label>
+        <div>
+            <input type="text" name="txtPhone"
+                   class="form-control"
+                   placeholder="Số điện thoại" ng-model="newBranch.Phone" required=""
+                   ng-pattern="/^[0-9]{10,11}$/" aria-invalid="true">
+            <span class="err_msg"
+                  ng-show="frmAddBranch.txtPhone.$invalid && !frmAddBranch.txtPhone.$pristine || newBranch.Phone == '' || newBranch.Phone == undefined"
+                  aria-hidden="false">*</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="cancelCreate();">
+        <span class="fa fa-ban"></span>{{'common.cancel' | translate}} 
+    </button>
+    <button id="createBranch" type="button" class="btn btn-success" ng-click="createBranch();">
+        <span class="fa fa-save"></span>{{'common.save_and_add' | translate}} 
+    </button>
+</div>

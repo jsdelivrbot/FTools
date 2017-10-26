@@ -1,0 +1,16 @@
+﻿
+@if (Session["EmployeeId"] == null)
+{
+    <li>
+        <button type="button" class="btn btn-login btn-lg" data-toggle="modal" data-target="#loginModal" onclick="javascript: $(window).scrollTop(0);"> Đăng nhập </button>
+    </li>
+}
+else
+{
+    <li>
+        <a href="/dashboard.html"><p>Vào ứng dụng</p></a>
+    </li>
+    <li>
+        <p style="margin:17px 0px 0px 0px;"> Xin chào @Session["EmployeeName"].ToString() - <a href="logout.html"> Đăng xuất </a></p>
+    </li>
+}

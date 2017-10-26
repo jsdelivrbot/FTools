@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_HomeShared.cshtml";
+}
+
+<div class="containerInfo searchpage clearfix" ng-controller="SearchController" ng-init="init();">
+    <div class="text-center hide" id="loadingSearch">
+        <img src="~/Content/img/Loading_icon.gif" alt="loading data" style="width:150px;" />
+        <h3 ng-show="type == 0">Đang phân tích dữ liệu fanpage {{ nameFanPage }}...</h3>
+        <h3 ng-show="type == 1">Đang phân tích dữ liệu group {{ nameGroup }}...</h3>
+    </div>
+    <div id="dataSearch">
+        <div ng-model="searchUrl" ng-include="searchUrl"></div>
+    </div>
+    
+</div>
+<div class="clearfix"></div>

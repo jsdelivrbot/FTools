@@ -1,0 +1,208 @@
+﻿@{
+    Layout = "~/Views/Shared/_HomeShared.cshtml";
+}
+
+@{
+    ViewBag.Title = "Danh sách Group";
+    Layout = "~/Views/Shared/_HomeShared.cshtml";
+}
+
+<div ng-controller="AllGroupController" ng-init="init();">
+    <div class="containerInDetail clearfix">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane fade in active">
+                <!--Danh sách các trang-->
+                <div class="detail_container baidang">
+                    <h3 class="lable"><span></span> Danh sách group</h3>
+                    <div class="chart-container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="chart-top-note chart-header-dropdown w100pt left">
+                                    <div class="select select--white right" style="margin-left: 0px;">
+                                        <select class="form-control" ng-model="page_size" ng-init="page_size = '10'" ng-change="onPageSizeChange()">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                    <div class="right" style="margin: 10px; padding-left: 10px; font-size: 14px;">Số bản ghi</div>
+                                    <div class="select select--white right">
+                                        <div class="col-md-12" style="padding: 0px;">
+                                            <input class="form-control" id="txtSearch" type="text" placeholder="Tìm kiếm" ng-model="q.txtSearch" ng-keyup="$event.keyCode == 13 ? onQueryChange() : null">
+                                        </div>
+                                        <i class="fa fa-search" style="color:#000; z-index: 2; position: absolute; top: 10px; right: 25px;" data-selector="true" ng-click="onQueryChange()"></i>
+                                    </div>
+                                    <div class="select select--white right" style="margin-left: 0px; width: 175px;">
+                                        <select class="form-control" ng-model="q.selectCategory" ng-init="q.selectCategory='0'" ng-change="onQueryChange()" ;>
+                                            <option value="0">Tất cả</option>
+                                            <option value="OPEN">Nhóm công khai</option>
+                                            <option value="CLOSED">Nhóm kín</option>
+                                            <option value="SECRET">Nhóm bí mật</option>
+                                        </select>
+                                    </div>
+                                    <div class="right filter-title">Loại nhóm</div>
+                                </div>
+                                <div class="chart-center-note w100pt left">
+                                    <div class="postTableGraph_chartBox">
+                                        <div id="chart_div_PTGP">
+                                            <div class="google-visualization-table">
+                                                <table class="google-visualization-table-table" cellspacing="0"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                        <tr class="google-visualization-table-tr-head">
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                STT<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Ảnh đại diện<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Tên nhóm<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="sortGroup(0);">
+                                                                Thành viên
+                                                                <span ng-show="statusSortGroup=='0' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSortGroup=='0' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="sortGroup(4);">
+                                                                Thành viên mới
+                                                                <span ng-show="statusSortGroup=='4' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSortGroup=='4' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Giá trị quảng cáo(EUR)<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="sortGroup(1);">
+                                                                Bài viết mỗi ngày
+                                                                <span ng-show="statusSortGroup=='1' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSortGroup=='1' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="sortGroup(2);">
+                                                                Hiệu quả tương tác(%)
+                                                                <span ng-show="statusSortGroup=='2' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSortGroup=='2' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient sort-descending" ng-click="sortGroup(3);">
+                                                                Tương tác bài viết(%)
+                                                                <span ng-show="statusSortGroup=='3' && typeSort=='desc'" class="fa fa-caret-down"></span>
+                                                                <span ng-show="statusSortGroup=='3' && typeSort=='asc'" class="fa fa-caret-up"></span>
+                                                            </th>
+                                                            <th class="google-visualization-table-th gradient unsorted">
+                                                                Link<span class="google-visualization-table-sortind"></span>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="postTableRow" ng-repeat="item in listGroup">
+                                                            <td class="google-visualization-table-td google-visualization-table-td-center">
+                                                                <b>{{ ((page - 1) * page_size) + $index + 1 }}</b>
+                                                            </td>
+                                                            <td class="google-visualization-table-td">
+                                                                <a href="http://facebook.com/{{ item.facebook_id }}"
+                                                                   target="_blank" class="previewLink">
+                                                                    <img ng-src="{{ item.group_avatar }}"
+                                                                         class="previewImage">
+                                                                </a>
+                                                            </td>
+                                                            <td class="google-visualization-table-td">
+                                                                <a href="/detail/{{ item.group_id }}/group.html"
+                                                                   target="_blank">
+                                                                    {{ item.group_name}}
+                                                                </a>
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ item.members_count | formatPrice }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ item.member_increase_yesterday | formatPrice }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                n.a.
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ item.post_per_day }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ findPercent(item.engagement) | number }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number">
+                                                                {{ findPercent(item.post_interaction) | number }}
+                                                            </td>
+                                                            <td class="google-visualization-table-td google-visualization-table-td-number" style="font-size: 20px; text-align: center;">
+                                                                <a href="http://facebook.com/{{ item.facebook_id }}"><span class="fa fa-facebook-square"></span></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="google-visualization-table-div-page gradient">
+                                                    <div class="charts-inline-block charts-custom-button charts-custom-button-disabled charts-custom-button-collapse-right"
+                                                         role="button" aria-disabled="true" style="user-select: none;">
+                                                        <div class="charts-inline-block charts-custom-button-outer-box">
+                                                            <div class="charts-inline-block charts-custom-button-inner-box">
+                                                                <span class="google-visualization-table-page-prev"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="charts-inline-block charts-custom-button charts-custom-button-collapse-left"
+                                                         role="button" tabindex="0" style="user-select: none;">
+                                                        <div class="charts-inline-block charts-custom-button-outer-box">
+                                                            <div class="charts-inline-block charts-custom-button-inner-box">
+                                                                <span class="google-visualization-table-page-next"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="google-visualization-table-page-numbers">
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient current">1</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">2</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">10</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">100</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">140</a>
+                                                        <a href="javascript:void(0)" class="google-visualization-table-page-number gradient">142</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-footer-note w100pt left">
+                                    <div id="freePageHinweis " class="left btn-all export-excel">
+                                        @*<button class="btn btn-default btn-prev pull-left" ng-click="GoPrevPage();">
+                                                <!--<i class="fa fa-long-arrow-left" aria-hidden="true"></i>-->
+                                            </button>
+                                            <button class="btn btn-default btn-next pull-left" ng-click="GoNextPage();">
+                                                <!--<i class="fa fa-long-arrow-right" aria-hidden="true"></i>-->
+                                            </button>*@
+                                        <button class="btn btn-default btn-export pull-right"  ng-click="exportData();">
+                                            Xuất Excel
+                                        </button>
+                                    </div>
+                                    <div id="postTableGesamtContainer" class="right">
+                                        <div id="postTable10ProPage">
+                                            <ul uib-pagination boundary-links="true" total-items="item_count" ng-model="page" items-per-page="page_size" class="pagination-sm right"
+                                                template-url="/scripts/widget/pagination.html" ng-change="onPageChange()" rotate="true" max-size="5"></ul>
+                                            @*<span>Total number of posts: <span>707</span></span>*@
+                                            @*<a href="#"
+                                                   onclick="try { optionsPTGP.pageSize = 10; chartPTGP.draw(viewPTGP, optionsPTGP); $(this).hide(); return false; } catch(e) { return false; }"
+                                                   style="margin-left: 10px;" class="noPrint">
+                                                    <!--
+                                                    -->
+                                                    Show 10 posts per page
+                                                </a>
+                                                <a href="#"
+                                                   onclick="try { optionsPTGP.page = 'disable'; optionsPTGP.pageSize = 1000; chartPTGP.draw(viewPTGP, optionsPTGP); $(this).hide(); $('#postTableGesamtContainer').hide(); return false; } catch(e) { return false; }"
+                                                   style="margin-left: 10px;" class="noPrint">
+                                                    <!--
+                                                    -->
+                                                    Show all posts
+                                                </a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

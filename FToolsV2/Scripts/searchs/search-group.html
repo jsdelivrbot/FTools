@@ -1,0 +1,16 @@
+﻿<h1>Kết quả tìm kiếm Group </h1>
+<div class="leaderboard_container cf" ng-repeat="resultSearchGroup in resultSearchGroups">
+    <a class="leaderboard_link cf clickable facebook" ng-click="addGroup(resultSearchGroup);">
+        <div class="leaderboard_img">
+            <img style="max-width: 50px;" src='{{ resultSearchGroup.picture }}'>
+        </div>
+        <div class="leaderboard_nameAndPoints">
+            <div class="leaderboard_name" id="id33">
+                <span title="{{ resultSearchGroup.name }}"> {{ resultSearchGroup.name }} </span>
+            </div>
+            <div class="leaderboard_pointsRectContainer">
+            </div>
+            <div class="leaderboard_categoryAndLikes"> {{ resultSearchGroup.members_count | formatPrice }}</div>
+        </div>
+    </a>
+</div>
