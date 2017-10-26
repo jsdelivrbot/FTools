@@ -40,8 +40,8 @@ namespace FToolsV2.Controllers
             UserData userData = new UserData();
             try
             {
-                HttpContext.Current.Session["UserId"] = "usid";
-                HttpContext.Current.Session["EmployeeId"] = "empid";
+                HttpContext.Current.Session["UserId"] = json["data"]["UserId"].ToString();
+                HttpContext.Current.Session["EmployeeId"] = json["data"]["EmployeeId"].ToString();
                 userData.EmployeeId = Int32.Parse(json["data"]["EmployeeId"].ToString());
                 HttpContext.Current.Session["EmployeeName"] = json["data"]["EmployeeName"].ToString();
                 HttpContext.Current.Session["ShopId"] = json["data"]["ShopId"].ToString();

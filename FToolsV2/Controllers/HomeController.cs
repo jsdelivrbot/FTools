@@ -248,14 +248,19 @@ namespace FToolsV2.Controllers
         {
             Session["EmployeeId"] = null;
             Session["UserId"] = null;
-            Session["FacebookUserToken"] = null;
+            Session["UserFacebookToken"] = null;
             Session["access_token"] = null;
             Session["temp_Email"] = null;
             Session["temp_Password"] = null;
             Session["IsTokenValid"] = null;
             Session["isNewUser"] = null;
             Session["FacebookUserId"] = null;
-            return Redirect(Request.Url.Scheme + "://" + Request.Url.Host);
+            Session["EmployeeName"] = null;
+            Session["ShopId"] = null;
+            Session["ShopName"] = null;
+            Session["BranchId"] = null;
+            Session["Group"] = null;
+            return Redirect("/login.html");
         }
     }
 }
