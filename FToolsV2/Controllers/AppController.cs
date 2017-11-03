@@ -15,6 +15,8 @@ using System.Web.SessionState;
 using log4net;
 using System.Threading.Tasks;
 using FToolsV2;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace FToolsV2.Controllers
 {

@@ -241,6 +241,60 @@ namespace FToolsV2.Controllers
 
         public ActionResult Login()
         {
+            var context = Request.Cookies["access_token"];
+            if (context != null)
+            {
+                var password = Security.getMd5("banhang1@yahoo.com");
+                LoginModel loginModel = new LoginModel();
+                loginModel.email = "banhang1@yahoo.com";
+                loginModel.password = password;
+                RestClient client = new RestClient(ConfigurationManager.AppSettings["fsaleApiUrl"].ToString());
+                var request = new RestRequest("api/employees/login", Method.POST);
+                request.AddJsonBody(loginModel);
+                request.AddHeader("Content-Type", "application/json");
+                IRestResponse response = client.Execute(request);
+                var content = response.Content; // raw content as string
+                JObject json = JObject.Parse(content);
+
+                try
+                {
+                    Session["UserId"] = json["data"]["UserId"].ToString();
+                    Session["EmployeeId"] = json["data"]["EmployeeId"].ToString();
+                    Session["EmployeeName"] = json["data"]["EmployeeName"].ToString();
+                    Session["ShopId"] = json["data"]["ShopId"].ToString();
+                    Session["ShopName"] = json["data"]["ShopName"].ToString();
+                    Session["BranchId"] = json["data"]["BranchId"].ToString();
+                    Session["Group"] = json["data"]["Group"].ToString();
+                    Session["FacebookUserId"] = json["data"]["FacebookUserId"].ToString();
+                    Session["IsTokenValid"] = false;
+                    Session["UserFacebookToken"] = null;
+                    Session["access_token"] = null;
+                    client = new RestClient(ConfigurationManager.AppSettings["fsaleApiUrl"].ToString());
+                    request = new RestRequest("api/security/token", Method.POST);
+                    request.AddParameter("grant_type", "password"); // adds to POST or URL querystring based on Method  
+                    request.AddParameter("userName", loginModel.email);
+                    request.AddParameter("password", loginModel.password);
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    response = client.Execute(request);
+                    content = response.Content; // raw content as string
+
+                    TokenResponse tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(content);
+                    if (tokenResponse != null)
+                        if (tokenResponse.access_token != null)
+                        {
+                            Session["access_token"] = tokenResponse.access_token;
+                            Session["temp_Email"] = loginModel.email;
+                            Session["temp_Password"] = loginModel.password;
+                        }
+                }
+                catch (Exception ex)
+                { }
+
+                if (Int32.Parse(json["meta"]["error_code"].ToString()) == 200) {
+                    return Redirect("/index.html");
+                }
+            }
+
             return View();
         }
 

@@ -2924,7 +2924,7 @@ myApp.controller('DetailPageController', ['$scope', '$rootScope', '$http', 'app'
     };
 
     //Biểu đồ lịch sử bài đăng
-    $scope.data = [['', 1, 1, null, null]];
+    $scope.data = [['', 2, 2, null, null]];
     $scope.chartHistoryPost = function () {
         var start_date = moment().startOf('isoWeek').format("DD-MM-YYYY");
         var end_date = moment().endOf('isoWeek').format("DD-MM-YYYY");
@@ -2972,10 +2972,10 @@ myApp.controller('DetailPageController', ['$scope', '$rootScope', '$http', 'app'
             var arr = [];
 
             if (data == undefined || data == '') {
-                data = [['', 1, 1, null, null]];
+                data = [['', 2, 2, null, null]];
             }
             arr.push([
-              "ID", "Thứ", "Giờ", "Số lượng tiếp cận", "Số lượng bài viết"
+              "ID", "Ngày thứ", "Giờ", "Số lượng tiếp cận", "Số lượng bài viết"
             ]);
 
 
@@ -3984,7 +3984,7 @@ angular.module("google-chart", []).directive("googleChart", function () {
     }
 });
 
-myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ngDialog', 'md5', '$window', 'cfpLoadingBar', '$mdDialog', '$mdToast', '$FB', '$filter', '$compile', '$sce', '$translate', function LoginController($scope, $rootScope, $http, app, ngDialog, md5, $window, cfpLoadingBar, $mdDialog, $mdToast, $FB, $filter, $compile, $sce, $translate) {
+myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ngDialog', 'md5', '$window', 'cfpLoadingBar', '$mdDialog', '$mdToast', '$FB', '$filter', '$compile', '$sce', '$translate', '$cookies', function LoginController($scope, $rootScope, $http, app, ngDialog, md5, $window, cfpLoadingBar, $mdDialog, $mdToast, $FB, $filter, $compile, $sce, $translate, $cookies) {
 
     $scope.init = function () {
         if ($scope.IsLogged == 1) {
@@ -4311,6 +4311,10 @@ myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ng
                             var target = $compile(data)($scope);
                             $("#boxLogin").html(target);
                         });
+
+                        var now = new Date();
+                        now.setDate(now.getDate() + 5);
+                        $cookies.put('access_token', data.access_token, { expires: now });
                         $scope.goDashboard();
                     }
                     else if (data.meta.error_code == 500) {
