@@ -573,7 +573,7 @@ myApp.directive('loadingPane', function ($timeout, $window) {
     };
 });
 
-//Xuất excel
+//Export excel
 myApp.factory('Excel', ['$window', function ($window) {
     var uri = 'data:application/vnd.ms-excel;base64,',
         template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
@@ -842,67 +842,6 @@ myApp.controller('LandingPageController', ['$scope', '$http', 'app', 'ngDialog',
                                     .fullscreen(false)
                             );
                         });
-
-
-                        //    }
-                        //    else if (data.meta.error_code == 500) {
-                        //        //redirect
-                        //        cfpLoadingBar.complete();
-                        //        $mdDialog.show(
-                        //            $mdDialog.alert()
-                        //                .clickOutsideToClose(true)
-                        //                .title($translate.instant('dashboard.info'))
-                        //                .textContent($translate.instant('alert.registration_failed_exit'))
-                        //                .ok($translate.instant('common.close'))
-                        //                .fullscreen(false)
-                        //        );
-                        //    }
-                        //    else if (data.meta.error_code == 404) {
-                        //        //redirect
-                        //        cfpLoadingBar.complete();
-                        //        $mdDialog.show(
-                        //            $mdDialog.alert()
-                        //                .clickOutsideToClose(true)
-                        //                .title($translate.instant('dashboard.info'))
-                        //                .textContent($translate.instant('alert.login_failed'))
-                        //                .ok($translate.instant('common.close'))
-                        //                .fullscreen(false)
-                        //        );
-                        //    }
-                        //    else if (data.meta.error_code == 400) {
-                        //        //redirect
-                        //        cfpLoadingBar.complete();
-                        //        $mdDialog.show(
-                        //            $mdDialog.alert()
-                        //                .clickOutsideToClose(true)
-                        //                .title($translate.instant('dashboard.info'))
-                        //                .textContent($translate.instant('alert.failed_process'))
-                        //                .ok($translate.instant('common.close'))
-                        //                .fullscreen(false)
-                        //        );
-                        //    }
-                        //    else {
-                        //        cfpLoadingBar.complete();
-                        //        $mdDialog.show(
-                        //            $mdDialog.alert()
-                        //                .clickOutsideToClose(true)
-                        //                .title($translate.instant('dashboard.info'))
-                        //                .textContent($translate.instant('alert.login_failed'))
-                        //                .ok($translate.instant('common.close'))
-                        //                .fullscreen(false)
-                        //        );
-                        //    }
-                        //}
-                        //else {
-                        //    $mdDialog.show(
-                        //        $mdDialog.alert()
-                        //            .clickOutsideToClose(true)
-                        //            .title($translate.instant('dashboard.info'))
-                        //            .textContent($translate.instant('alert.login_failed'))
-                        //            .ok($translate.instant('common.close'))
-                        //            .fullscreen(false)
-                        //    );
-                        //}
                     })
                         .error(function (data, status, headers, config) { // optional
                             $mdDialog.show(
@@ -3915,7 +3854,7 @@ myApp.controller('AllGroupController', ['$scope', '$rootScope', '$http', 'app', 
     }
 }]);
 
-//Danh sách post trên hệ thống
+//
 myApp.controller('AllPostController', ['$scope', '$rootScope', '$http', 'app', 'ngDialog', 'md5', '$window', 'cfpLoadingBar', '$mdDialog', '$mdToast', '$FB', '$filter', '$compile', '$sce', function AllPostController($scope, $rootScope, $http, app, ngDialog, md5, $window, cfpLoadingBar, $mdDialog, $mdToast, $FB, $filter, $compile, $sce) {
     $scope.page = 1;
     $scope.page_size = 10;
@@ -4146,129 +4085,6 @@ myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ng
         });
     }
 
-    //$scope.login = function () {
-    //    cfpLoadingBar.start();
-    //    var apiUrl = '/api/app/login';
-
-    //    var email = angular.element(document.querySelector('#txtLoginEmail')).val();
-    //    var password = angular.element(document.querySelector('#txtLoginPassword')).val();
-
-    //    if (email == undefined || password == undefined || email == "" || password == "") {
-    //        $mdDialog.show(
-    //            $mdDialog.alert()
-    //                .clickOutsideToClose(true)
-    //                .title($translate.instant('dashboard.info'))
-    //                .textContent($translate.instant('alert.missing_data'))
-    //                .ok($translate.instant('common.close'))
-    //        );
-    //        return;
-    //    }
-
-    //    var login = {
-    //        email: email,
-    //        password: md5.createHash(password || '')
-    //    };
-
-    //    var post = $http({
-    //        method: "POST",
-    //        url: apiUrl,
-    //        data: login
-    //    });
-
-    //    post.success(function successCallback(data, status, headers, config) {
-    //        // success
-    //        if (data.meta != null && data.meta != undefined) {
-    //            if (data.meta.error_code == 200) {
-    //                cfpLoadingBar.complete();
-    //                $("#boxLogin").load("/Shared/BoxLogin", function (data) {
-    //                    var target = $compile(data)($scope);
-    //                    $("#boxLogin").html(target);
-    //                });
-    //                $scope.goDashboard();
-    //            }
-    //            else if (data.meta.error_code == 500) {
-    //                //redirect
-    //                cfpLoadingBar.complete();
-    //                $mdDialog.show(
-    //                    $mdDialog.alert()
-    //                        .clickOutsideToClose(true)
-    //                        .title($translate.instant('dashboard.info'))
-    //                        .textContent($translate.instant('alert.registration_failed_exit'))
-    //                        .ok($translate.instant('common.close'))
-    //                );
-    //            }
-    //            else if (data.meta.error_code == 404) {
-    //                //redirect
-    //                cfpLoadingBar.complete();
-    //                $mdDialog.show(
-    //                    $mdDialog.alert()
-    //                        .clickOutsideToClose(true)
-    //                        .title($translate.instant('dashboard.info'))
-    //                        .textContent($translate.instant('alert.login_failed'))
-    //                        .ok($translate.instant('common.close'))
-    //                        .fullscreen(false)
-    //                );
-    //            }
-    //            else if (data.meta.error_code == 423) {
-    //                //redirect
-    //                cfpLoadingBar.complete();
-    //                $mdDialog.show(
-    //                    $mdDialog.alert()
-    //                        .clickOutsideToClose(true)
-    //                        .title($translate.instant('dashboard.info'))
-    //                        .textContent($translate.instant('alert.fail_lock_login'))
-    //                        .ok($translate.instant('common.close'))
-    //                        .fullscreen(false)
-    //                );
-    //            }
-    //            else if (data.meta.error_code == 400) {
-    //                //redirect
-    //                cfpLoadingBar.complete();
-    //                $mdDialog.show(
-    //                    $mdDialog.alert()
-    //                        .clickOutsideToClose(true)
-    //                        .title($translate.instant('dashboard.info'))
-    //                        .textContent($translate.instant('alert.failed_process'))
-    //                        .ok($translate.instant('common.close'))
-    //                        .fullscreen(false)
-    //                );
-    //            }
-    //            else {
-    //                cfpLoadingBar.complete();
-    //                $mdDialog.show(
-    //                    $mdDialog.alert()
-    //                        .clickOutsideToClose(true)
-    //                        .title($translate.instant('dashboard.info'))
-    //                        .textContent($translate.instant('alert.login_failed'))
-    //                        .ok($translate.instant('common.close'))
-    //                        .fullscreen(false)
-    //                );
-    //            }
-    //        }
-    //        else {
-    //            $mdDialog.show(
-    //                $mdDialog.alert()
-    //                    .clickOutsideToClose(true)
-    //                    .title($translate.instant('dashboard.info'))
-    //                    .textContent($translate.instant('alert.login_failed'))
-    //                    .ok($translate.instant('common.close'))
-    //                    .fullscreen(false)
-    //            );
-    //        }
-    //    })
-    //        .error(function (data, status, headers, config) { // optional
-    //            cfpLoadingBar.complete();
-    //            $mdDialog.show(
-    //                $mdDialog.alert()
-    //                    .clickOutsideToClose(false)
-    //                    .title($translate.instant('dashboard.info'))
-    //                    .textContent($translate.instant('alert.login_failed'))
-    //                    .ok($translate.instant('common.close'))
-    //                    .fullscreen(false)
-    //            );
-    //        });
-    //}
-
     $scope.login = function () {
         cfpLoadingBar.start();
         var apiUrl = '/api/app/login';
@@ -4288,95 +4104,45 @@ myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ng
         }
 
         var login = {
-            email: email,
-            password: md5.createHash(password || '')
+            "email": email,
+            "password": password
         };
+        console.log(login);
+        var post = $http({
+            method: "POST",
+            url: apiUrl,
+            data: login
+        });
 
-        if (login.email == "marketing.fsale@gmail.com" && login.password == md5.createHash('fsale@123')) {
-            var post = $http({
-                method: "POST",
-                url: apiUrl,
-                data: {
-                    email: "banhang1@yahoo.com",
-                    password: md5.createHash("banhang1@yahoo.com")
+        post.success(function successCallback(data, status, headers, config) {
+            // success
+            if (data.meta != null && data.meta != undefined) {
+                if (data.meta.error_code == 200) {
+                    cfpLoadingBar.complete();
+                    $("#boxLogin").load("/Shared/BoxLogin", function (data) {
+                        var target = $compile(data)($scope);
+                        $("#boxLogin").html(target);
+                    });
+
+                    var now = new Date();
+                    now.setDate(now.getDate() + 5);
+                    $cookies.put('access_token', data.access_token, { expires: now });
+                    $scope.goDashboard();
                 }
-            });
-
-            post.success(function successCallback(data, status, headers, config) {
-                // success
-                if (data.meta != null && data.meta != undefined) {
-                    if (data.meta.error_code == 200) {
-                        cfpLoadingBar.complete();
-                        $("#boxLogin").load("/Shared/BoxLogin", function (data) {
-                            var target = $compile(data)($scope);
-                            $("#boxLogin").html(target);
-                        });
-
-                        var now = new Date();
-                        now.setDate(now.getDate() + 5);
-                        $cookies.put('access_token', data.access_token, { expires: now });
-                        $scope.goDashboard();
-                    }
-                    else if (data.meta.error_code == 500) {
-                        //redirect
-                        cfpLoadingBar.complete();
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title($translate.instant('dashboard.info'))
-                                .textContent($translate.instant('alert.registration_failed_exit'))
-                                .ok($translate.instant('common.close'))
-                        );
-                    }
-                    else if (data.meta.error_code == 404) {
-                        //redirect
-                        cfpLoadingBar.complete();
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title($translate.instant('dashboard.info'))
-                                .textContent($translate.instant('alert.login_failed'))
-                                .ok($translate.instant('common.close'))
-                                .fullscreen(false)
-                        );
-                    }
-                    else if (data.meta.error_code == 423) {
-                        //redirect
-                        cfpLoadingBar.complete();
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title($translate.instant('dashboard.info'))
-                                .textContent($translate.instant('alert.fail_lock_login'))
-                                .ok($translate.instant('common.close'))
-                                .fullscreen(false)
-                        );
-                    }
-                    else if (data.meta.error_code == 400) {
-                        //redirect
-                        cfpLoadingBar.complete();
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title($translate.instant('dashboard.info'))
-                                .textContent($translate.instant('alert.failed_process'))
-                                .ok($translate.instant('common.close'))
-                                .fullscreen(false)
-                        );
-                    }
-                    else {
-                        cfpLoadingBar.complete();
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title($translate.instant('dashboard.info'))
-                                .textContent($translate.instant('alert.login_failed'))
-                                .ok($translate.instant('common.close'))
-                                .fullscreen(false)
-                        );
-                    }
+                else if (data.meta.error_code == 500) {
+                    //redirect
+                    cfpLoadingBar.complete();
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title($translate.instant('dashboard.info'))
+                            .textContent($translate.instant('alert.registration_failed_exit'))
+                            .ok($translate.instant('common.close'))
+                    );
                 }
-                else {
+                else if (data.meta.error_code == 404) {
+                    //redirect
+                    cfpLoadingBar.complete();
                     $mdDialog.show(
                         $mdDialog.alert()
                             .clickOutsideToClose(true)
@@ -4386,7 +4152,53 @@ myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ng
                             .fullscreen(false)
                     );
                 }
-            })
+                else if (data.meta.error_code == 423) {
+                    //redirect
+                    cfpLoadingBar.complete();
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title($translate.instant('dashboard.info'))
+                            .textContent($translate.instant('alert.fail_lock_login'))
+                            .ok($translate.instant('common.close'))
+                            .fullscreen(false)
+                    );
+                }
+                else if (data.meta.error_code == 400) {
+                    //redirect
+                    cfpLoadingBar.complete();
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title($translate.instant('dashboard.info'))
+                            .textContent($translate.instant('alert.failed_process'))
+                            .ok($translate.instant('common.close'))
+                            .fullscreen(false)
+                    );
+                }
+                else {
+                    cfpLoadingBar.complete();
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title($translate.instant('dashboard.info'))
+                            .textContent($translate.instant('alert.login_failed'))
+                            .ok($translate.instant('common.close'))
+                            .fullscreen(false)
+                    );
+                }
+            }
+            else {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title($translate.instant('dashboard.info'))
+                        .textContent($translate.instant('alert.login_failed'))
+                        .ok($translate.instant('common.close'))
+                        .fullscreen(false)
+                );
+            }
+        })
             .error(function (data, status, headers, config) { // optional
                 cfpLoadingBar.complete();
                 $mdDialog.show(
@@ -4398,17 +4210,6 @@ myApp.controller('LoginController', ['$scope', '$rootScope', '$http', 'app', 'ng
                         .fullscreen(false)
                 );
             });
-
-        }
-        else {
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .clickOutsideToClose(true)
-                    .title($translate.instant('dashboard.info'))
-                    .textContent($translate.instant('alert.login_failed'))
-                    .ok($translate.instant('common.close'))
-            );
-        }
     }
 
     $scope.goDashboard = function () {

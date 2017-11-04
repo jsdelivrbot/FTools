@@ -32,9 +32,22 @@ namespace FToolsV2.Controllers
         [ActionName("login")]
         public IHttpActionResult login(LoginModel loginModel)
         {
+            LoginModel obj = new LoginModel();
+            if (loginModel.email != "marketing.fsale@gmail.com" || loginModel.password != "fsale@123")
+            {
+                DefaultResponse def = new DefaultResponse();
+                def.meta = new Meta(404, "Email hoặc mật khẩu không đúng. Vui lòng kiểm tra lại.");
+
+                return Ok(def);
+            }
+            else
+            {
+                obj.email = "banhang1@yahoo.com";
+                obj.password = Security.getMd5("banhang1@yahoo.com");
+            }
             RestClient client = new RestClient(ConfigurationManager.AppSettings["fsaleApiUrl"].ToString());
             var request = new RestRequest("api/employees/login", Method.POST);
-            request.AddJsonBody(loginModel);
+            request.AddJsonBody(obj);
             request.AddHeader("Content-Type", "application/json");
             IRestResponse response = client.Execute(request);
             var content = response.Content; // raw content as string
